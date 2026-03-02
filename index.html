@@ -717,15 +717,15 @@
                         <h3 class="en">Query the Vector DB</h3>
                         <h3 class="pl">Zapytanie do bazy wektorowej</h3>
                         <p class="en" style="font-size:0.9rem;color:var(--text-secondary)">
-                            Qdrant stores my project history, decisions, and technical context. Every chunk has metadata: dates, quality scores, sources. Backed by ~2,000 archived .md files and 240+ session transcripts.
+                            Qdrant stores my project history, decisions, and technical context. Every chunk has metadata: dates, quality scores, sources. Backed by 15,000+ vector chunks and 240+ session transcripts.
                         </p>
                         <p class="pl" style="font-size:0.9rem;color:var(--text-secondary)">
-                            Qdrant przechowuje historie projektow, decyzje i kontekst techniczny. Kazdy chunk ma metadane: daty, oceny jakosci, zrodla. Podparte ~2000 zarchiwizowanymi plikami .md i 240+ transkryptami sesji.
+                            Qdrant przechowuje historie projektow, decyzje i kontekst techniczny. Kazdy chunk ma metadane: daty, oceny jakosci, zrodla. Podparte 15 000+ chunkami wektorowymi i 240+ transkryptami sesji.
                         </p>
                         <div class="step-code"><span class="fn">qdrant-find</span>(<span class="str">"project metrics LOC endpoints"</span>)
 <span class="fn">qdrant-find</span>(<span class="str">"sesja telerecepcja deploy"</span>)
 <span class="fn">qdrant-find</span>(<span class="str">"AI extraction Gemini prompt"</span>)
-<span class="comment">// 2 Qdrant collections + ~2,000 .md files</span>
+<span class="comment">// 2 Qdrant collections, 15,000+ chunks</span>
 <span class="comment">// 15 custom agents, 240+ sessions</span></div>
                     </div>
 
@@ -803,10 +803,10 @@
                         <div class="req-requirement en">"Actively uses AI tools in daily work"</div>
                         <div class="req-requirement pl">"Aktywnie korzysta z narzedzi AI w codziennej pracy"</div>
                         <div class="req-evidence en">
-                            <strong>Claude Code</strong>: 240+ sessions, 14k LOC generated, <strong>15 custom AI agents</strong> (deploy, testing, security audit, research, design, UX). <strong>Gemini</strong>: 5 model variants for OCR, transcription, extraction. <strong>Qdrant</strong> + ~2,000 .md archive files as persistent AI memory. <strong>Perplexity</strong> research pipeline. <strong>MCP protocol</strong> connecting all tools.
+                            <strong>Claude Code</strong>: 240+ sessions, 14k LOC generated, <strong>15 custom AI agents</strong> (deploy, testing, security audit, research, design, UX). <strong>Gemini</strong>: 5 model variants for OCR, transcription, extraction. <strong>Qdrant</strong> + 15,000+ vector chunks as persistent AI memory. <strong>Perplexity</strong> research pipeline. <strong>MCP protocol</strong> connecting all tools.
                         </div>
                         <div class="req-evidence pl">
-                            <strong>Claude Code</strong>: 240+ sesji, 14k LOC wygenerowane, <strong>15 wlasnych agentow AI</strong> (deploy, testing, audyt bezpieczenstwa, research, design, UX). <strong>Gemini</strong>: 5 wariantow modeli do OCR, transkrypcji, ekstrakcji. <strong>Qdrant</strong> + ~2000 zarchiwizowanych plikow .md jako trwala pamiec AI. <strong>Perplexity</strong> pipeline research. <strong>Protokol MCP</strong> laczacy wszystkie narzedzia.
+                            <strong>Claude Code</strong>: 240+ sesji, 14k LOC wygenerowane, <strong>15 wlasnych agentow AI</strong> (deploy, testing, audyt bezpieczenstwa, research, design, UX). <strong>Gemini</strong>: 5 wariantow modeli do OCR, transkrypcji, ekstrakcji. <strong>Qdrant</strong> + 15 000+ chunkow wektorowych jako trwala pamiec AI. <strong>Perplexity</strong> pipeline research. <strong>Protokol MCP</strong> laczacy wszystkie narzedzia.
                         </div>
                         <div class="req-source">source: qdrant-find("AI tools daily usage") &middot; quality: gold</div>
                         <div class="conf-label"><span>Confidence</span><span class="accent-green">99%</span></div>
@@ -1358,7 +1358,7 @@
                         This is not a CV. This is a demonstration.<br><br>
                         You asked for someone who "actively uses AI tools" and "vibe-codes requirements into working prototypes."
                         Rather than claiming these skills on paper, I made the application process itself prove them.<br><br>
-                        Every data point on this page was retrieved from a vector database I built and maintain &mdash; backed by ~2,000 knowledge files and 240+ session transcripts.
+                        Every data point on this page was retrieved from a vector database I built and maintain &mdash; backed by 15,000+ vector chunks and 240+ session transcripts.
                         The page was generated by one of 15 custom AI agents I configure and orchestrate daily.
                         The infrastructure hosting it is the same stack I use for production SaaS.
                         Even the language barrier section above was addressed by the same technology I ship to customers.<br><br>
@@ -1447,8 +1447,8 @@
             <div class="container">
                 <p class="en">Built with Claude Code + Qdrant &middot; Zero JavaScript &middot; EN/PL toggle is pure CSS</p>
                 <p class="pl">Zbudowane z Claude Code + Qdrant &middot; Zero JavaScriptu &middot; Przelacznik EN/PL to czysty CSS</p>
-                <p style="margin-top:4px" class="en">Source data: ~2,000 knowledge files &middot; 240+ AI sessions &middot; 15 custom agents &middot; 8 weeks</p>
-                <p style="margin-top:4px" class="pl">Dane zrodlowe: ~2000 plikow wiedzy &middot; 240+ sesji AI &middot; 15 wlasnych agentow &middot; 8 tygodni</p>
+                <p style="margin-top:4px" class="en">Source data: 15,000+ Qdrant chunks &middot; 240+ AI sessions &middot; 15 custom agents &middot; 8 weeks</p>
+                <p style="margin-top:4px" class="pl">Dane zrodlowe: 15 000+ chunkow Qdrant &middot; 240+ sesji AI &middot; 15 wlasnych agentow &middot; 8 tygodni</p>
             </div>
         </footer>
 
