@@ -59,30 +59,24 @@
         #lang-toggle { display: none; }
 
         /* Default: Polish visible, English hidden */
-        .en { display: none; }
-        .pl { display: revert; }
+        .en { display: none !important; }
+        .pl { }
 
         /* When checked: English visible, Polish hidden */
-        #lang-toggle:checked ~ .page-wrap .en { display: revert; }
-        #lang-toggle:checked ~ .page-wrap .pl { display: none; }
+        #lang-toggle:checked ~ .page-wrap .en { display: revert !important; }
+        #lang-toggle:checked ~ .page-wrap .pl { display: none !important; }
 
-        /* Block-level elements need block display */
-        .en.block { display: none; }
-        .pl.block { display: block; }
-        #lang-toggle:checked ~ .page-wrap .en.block { display: block; }
-        #lang-toggle:checked ~ .page-wrap .pl.block { display: none; }
+        /* Block-level elements */
+        #lang-toggle:checked ~ .page-wrap .en.block { display: block !important; }
+        #lang-toggle:checked ~ .page-wrap .pl.block { display: none !important; }
 
         /* Grid items */
-        .en.grid-item { display: none; }
-        .pl.grid-item { display: flex; }
-        #lang-toggle:checked ~ .page-wrap .en.grid-item { display: flex; }
-        #lang-toggle:checked ~ .page-wrap .pl.grid-item { display: none; }
+        #lang-toggle:checked ~ .page-wrap .en.grid-item { display: flex !important; }
+        #lang-toggle:checked ~ .page-wrap .pl.grid-item { display: none !important; }
 
         /* Flex items */
-        .en.flex-item { display: none; }
-        .pl.flex-item { display: flex; }
-        #lang-toggle:checked ~ .page-wrap .en.flex-item { display: flex; }
-        #lang-toggle:checked ~ .page-wrap .pl.flex-item { display: none; }
+        #lang-toggle:checked ~ .page-wrap .en.flex-item { display: flex !important; }
+        #lang-toggle:checked ~ .page-wrap .pl.flex-item { display: none !important; }
 
         /* Toggle switch styling */
         .lang-switch {
