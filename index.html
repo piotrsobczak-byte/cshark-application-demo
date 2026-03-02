@@ -54,6 +54,90 @@
         }
 
         /* ═══════════════════════════════════════════
+           LANGUAGE TOGGLE (pure CSS checkbox hack)
+           ═══════════════════════════════════════════ */
+        #lang-toggle { display: none; }
+
+        /* Default: English visible, Polish hidden */
+        .pl { display: none; }
+        .en { display: revert; }
+
+        /* When checked: Polish visible, English hidden */
+        #lang-toggle:checked ~ .page-wrap .pl { display: revert; }
+        #lang-toggle:checked ~ .page-wrap .en { display: none; }
+
+        /* Block-level elements need block display */
+        .pl.block { display: none; }
+        .en.block { display: block; }
+        #lang-toggle:checked ~ .page-wrap .pl.block { display: block; }
+        #lang-toggle:checked ~ .page-wrap .en.block { display: none; }
+
+        /* Grid items */
+        .pl.grid-item { display: none; }
+        .en.grid-item { display: flex; }
+        #lang-toggle:checked ~ .page-wrap .pl.grid-item { display: flex; }
+        #lang-toggle:checked ~ .page-wrap .en.grid-item { display: none; }
+
+        /* Flex items */
+        .pl.flex-item { display: none; }
+        .en.flex-item { display: flex; }
+        #lang-toggle:checked ~ .page-wrap .pl.flex-item { display: flex; }
+        #lang-toggle:checked ~ .page-wrap .en.flex-item { display: none; }
+
+        /* Toggle switch styling */
+        .lang-switch {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .lang-switch:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--green);
+            color: var(--text-primary);
+        }
+        .lang-switch .flag-en,
+        .lang-switch .flag-pl { transition: opacity 0.2s; }
+
+        /* EN active state (default) */
+        .lang-switch .flag-en { opacity: 1; }
+        .lang-switch .flag-pl { opacity: 0.4; }
+        .lang-switch .slider {
+            width: 28px; height: 16px;
+            background: var(--border);
+            border-radius: 8px;
+            position: relative;
+            transition: background 0.2s;
+        }
+        .lang-switch .slider::after {
+            content: '';
+            position: absolute;
+            width: 12px; height: 12px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            top: 2px; left: 2px;
+            transition: transform 0.2s;
+        }
+        /* PL active state */
+        #lang-toggle:checked ~ .page-wrap .lang-switch .flag-en { opacity: 0.4; }
+        #lang-toggle:checked ~ .page-wrap .lang-switch .flag-pl { opacity: 1; }
+        #lang-toggle:checked ~ .page-wrap .lang-switch .slider { background: var(--green); }
+        #lang-toggle:checked ~ .page-wrap .lang-switch .slider::after { transform: translateX(12px); }
+
+        /* ═══════════════════════════════════════════
            LAYOUT
            ═══════════════════════════════════════════ */
         .container {
@@ -76,25 +160,16 @@
         p { color: var(--text-secondary); }
         a { color: var(--blue); text-decoration: none; }
         a:hover { text-decoration: underline; }
-        code, .mono {
-            font-family: var(--font-mono);
-            font-size: 0.875em;
-        }
+        code, .mono { font-family: var(--font-mono); font-size: 0.875em; }
         .label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em;
             color: var(--text-muted);
         }
         .section-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--green);
-            margin-bottom: 8px;
-            display: block;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--green); margin-bottom: 8px; display: block;
         }
         .accent-green { color: var(--green); }
         .accent-blue { color: var(--blue); }
@@ -120,9 +195,7 @@
             border-radius: 100px;
             margin-bottom: 24px;
         }
-        .hero h1 {
-            margin-bottom: 16px;
-        }
+        .hero h1 { margin-bottom: 16px; }
         .hero h1 .name { color: var(--green); }
         .hero-sub {
             font-size: 1.125rem;
@@ -141,8 +214,7 @@
         .hero-meta span::before {
             content: '';
             display: inline-block;
-            width: 6px;
-            height: 6px;
+            width: 6px; height: 6px;
             border-radius: 50%;
             margin-right: 8px;
             vertical-align: middle;
@@ -163,16 +235,6 @@
             transition: background 0.2s;
         }
         .card:hover { background: var(--bg-card-hover); }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
 
         /* ═══════════════════════════════════════════
            PROCESS SECTION
@@ -185,16 +247,13 @@
         }
         .step-number {
             display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
+            align-items: center; justify-content: center;
+            width: 32px; height: 32px;
             border-radius: 50%;
             background: var(--green-bg);
             border: 1px solid rgba(34, 197, 94, 0.25);
             color: var(--green);
-            font-weight: 700;
-            font-size: 0.875rem;
+            font-weight: 700; font-size: 0.875rem;
             margin-bottom: 12px;
         }
         .step-code {
@@ -214,7 +273,6 @@
         .step-code .str { color: var(--green); }
         .step-code .comment { color: var(--text-muted); }
         .step-code .kw { color: var(--purple); }
-        .step-code .num { color: var(--amber); }
 
         /* ═══════════════════════════════════════════
            REQUIREMENT CARDS
@@ -236,14 +294,10 @@
         }
         .req-card:hover { background: var(--bg-card-hover); }
         .req-tag {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 3px 10px;
-            border-radius: 100px;
-            display: inline-block;
-            width: fit-content;
+            font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            padding: 3px 10px; border-radius: 100px;
+            display: inline-block; width: fit-content;
         }
         .tag-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(34, 197, 94, 0.2); }
         .tag-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(59, 130, 246, 0.2); }
@@ -274,7 +328,6 @@
         .confidence-fill {
             height: 100%;
             border-radius: 2px;
-            transition: width 0.6s ease;
         }
         .conf-label {
             font-family: var(--font-mono);
@@ -303,12 +356,10 @@
         }
         .project-card:hover { background: var(--bg-card-hover); }
         .project-icon {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: var(--radius);
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: center; justify-content: center;
             font-size: 1.25rem;
             margin-bottom: 16px;
         }
@@ -342,6 +393,20 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+        .project-stack {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .stack-tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--bg-primary);
+            color: var(--text-muted);
+            border: 1px solid var(--border-subtle);
+        }
 
         /* ═══════════════════════════════════════════
            TIMELINE
@@ -354,9 +419,7 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 7px;
-            top: 8px;
-            bottom: 8px;
+            left: 7px; top: 8px; bottom: 8px;
             width: 2px;
             background: linear-gradient(to bottom, var(--green), var(--blue), var(--purple));
             border-radius: 1px;
@@ -368,10 +431,8 @@
         .tl-item:last-child { padding-bottom: 0; }
         .tl-dot {
             position: absolute;
-            left: -28px;
-            top: 6px;
-            width: 16px;
-            height: 16px;
+            left: -28px; top: 6px;
+            width: 16px; height: 16px;
             border-radius: 50%;
             border: 2px solid;
             background: var(--bg-primary);
@@ -386,15 +447,8 @@
             color: var(--text-muted);
             margin-bottom: 4px;
         }
-        .tl-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 4px;
-        }
-        .tl-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
+        .tl-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+        .tl-desc { font-size: 0.85rem; color: var(--text-secondary); }
         .tl-item-current .tl-dot {
             background: var(--green);
             box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
@@ -418,22 +472,56 @@
             align-items: center;
             justify-content: space-between;
         }
-        .tech-name {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .tech-level {
-            display: flex;
-            gap: 3px;
-        }
+        .tech-name { font-size: 0.9rem; font-weight: 500; }
+        .tech-level { display: flex; gap: 3px; }
         .tech-dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             border-radius: 50%;
             background: var(--border);
         }
         .tech-dot.filled { background: var(--green); }
         .tech-dot.half { background: var(--amber); }
+
+        /* ═══════════════════════════════════════════
+           LANGUAGE SECTION
+           ═══════════════════════════════════════════ */
+        .lang-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-top: 24px;
+        }
+        .lang-flow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        .lang-flow-step {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .lang-flow-arrow {
+            color: var(--green);
+            font-weight: 700;
+        }
+        .lang-honest {
+            background: var(--amber-bg);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 20px 24px;
+            margin-top: 24px;
+        }
+        .lang-honest p {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
 
         /* ═══════════════════════════════════════════
            BLOCKQUOTE / META
@@ -480,11 +568,7 @@
             color: var(--text-muted);
             margin-bottom: 8px;
         }
-        .gallup-name {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 8px;
-        }
+        .gallup-name { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
         .gallup-desc {
             font-size: 0.8rem;
             color: var(--text-secondary);
@@ -505,9 +589,7 @@
             font-size: 0.95rem;
             color: var(--text-secondary);
         }
-        .contact-item strong {
-            color: var(--text-primary);
-        }
+        .contact-item strong { color: var(--text-primary); }
 
         /* ═══════════════════════════════════════════
            FOOTER
@@ -530,20 +612,14 @@
             .hero { padding: 56px 0 48px; }
             .process-steps,
             .req-grid,
-            .project-grid,
-            .grid-2,
-            .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            .gallup-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .gallup-grid > :last-child {
-                grid-column: 1 / -1;
-            }
+            .project-grid { grid-template-columns: 1fr; }
+            .gallup-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallup-grid > :last-child { grid-column: 1 / -1; }
             .hero-meta { flex-direction: column; gap: 8px; }
             .contact-bar { flex-direction: column; align-items: center; gap: 12px; }
             .tech-grid { grid-template-columns: repeat(2, 1fr); }
+            .lang-switch { top: 8px; right: 8px; font-size: 0.75rem; padding: 4px 10px; }
+            .lang-flow { flex-direction: column; align-items: flex-start; }
         }
 
         @media (max-width: 480px) {
@@ -556,92 +632,114 @@
            ═══════════════════════════════════════════ */
         @media print {
             :root {
-                --bg-primary: #fff;
-                --bg-secondary: #f9f9f9;
-                --bg-card: #f5f5f5;
-                --bg-card-hover: #f5f5f5;
-                --border: #ddd;
-                --border-subtle: #eee;
-                --text-primary: #111;
-                --text-secondary: #444;
-                --text-muted: #888;
-                --green-bg: #f0fdf4;
-                --blue-bg: #eff6ff;
-                --amber-bg: #fffbeb;
-                --purple-bg: #faf5ff;
+                --bg-primary: #fff; --bg-secondary: #f9f9f9;
+                --bg-card: #f5f5f5; --bg-card-hover: #f5f5f5;
+                --border: #ddd; --border-subtle: #eee;
+                --text-primary: #111; --text-secondary: #444; --text-muted: #888;
+                --green-bg: #f0fdf4; --blue-bg: #eff6ff;
+                --amber-bg: #fffbeb; --purple-bg: #faf5ff;
             }
             body { font-size: 11pt; }
             section { padding: 24px 0; break-inside: avoid; }
             .hero { padding: 32px 0 24px; }
-            .card, .req-card, .project-card, .gallup-card, .tech-item {
-                break-inside: avoid;
-                box-shadow: none;
-            }
-            .timeline::before {
-                background: #666;
-            }
+            .card, .req-card, .project-card, .gallup-card, .tech-item { break-inside: avoid; }
+            .timeline::before { background: #666; }
             .tl-dot { background: #fff; }
             a { color: #111; text-decoration: underline; }
             .meta-quote { border-left-color: #333; background: #f5f5f5; }
+            .lang-switch { display: none; }
+            /* Print both languages */
+            .pl { display: none !important; }
+            .en { display: revert !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ═══════════════════════════════════════════
-         HEADER
-         ═══════════════════════════════════════════ -->
-    <header class="hero">
-        <div class="container">
-            <div class="hero-badge">qdrant-find("CSHARK requirements") &rarr; generated application</div>
-            <h1>
-                <span class="name">Piotr Sobczak</span><br>
-                Product Owner Application
-            </h1>
-            <p class="hero-sub">
-                This page was generated by an AI agent querying my personal vector database of 1,000+ knowledge chunks.
-                The process itself is the proof of competency.
-            </p>
-            <div class="hero-meta">
-                <span class="dot-green">Claude Code &middot; 70+ sessions</span>
-                <span class="dot-blue">Qdrant &middot; 1,000+ chunks</span>
-                <span class="dot-amber">4 parallel projects</span>
-                <span class="dot-purple">Built in &lt;2 hours</span>
-            </div>
-        </div>
-    </header>
+    <!-- CSS-only language toggle: checkbox outside .page-wrap so :checked ~ works -->
+    <input type="checkbox" id="lang-toggle">
 
-    <main class="container">
+    <div class="page-wrap">
+
+        <!-- Fixed language toggle button -->
+        <label for="lang-toggle" class="lang-switch">
+            <span class="flag-en">EN</span>
+            <span class="slider"></span>
+            <span class="flag-pl">PL</span>
+        </label>
 
         <!-- ═══════════════════════════════════════════
-             THE PROCESS
+             HEADER
              ═══════════════════════════════════════════ -->
-        <section id="process">
-            <span class="section-label">How this was built</span>
-            <h2>The Process</h2>
-            <p>Three steps. Real code. Real data. Zero hallucination.</p>
+        <header class="hero">
+            <div class="container">
+                <div class="hero-badge">qdrant-find("CSHARK requirements") &rarr; generated application</div>
+                <h1>
+                    <span class="name">Piotr Sobczak</span><br>
+                    <span class="en">Product Owner Application</span>
+                    <span class="pl">Aplikacja na Product Ownera</span>
+                </h1>
+                <p class="hero-sub en">
+                    This page was generated by an AI agent querying my personal vector database of 1,000+ knowledge chunks.
+                    The process itself is the proof of competency.
+                </p>
+                <p class="hero-sub pl">
+                    Ta strona zostala wygenerowana przez agenta AI odpytujacego moja osobista baze wektorowa z 1000+ fragmentow wiedzy.
+                    Sam proces jest dowodem kompetencji.
+                </p>
+                <div class="hero-meta">
+                    <span class="dot-green">Claude Code &middot; 70+ sessions</span>
+                    <span class="dot-blue">Qdrant &middot; 1,000+ chunks</span>
+                    <span class="dot-amber en">4 parallel projects</span>
+                    <span class="dot-amber pl">4 projekty rownolegle</span>
+                    <span class="dot-purple en">Built in &lt;2 hours</span>
+                    <span class="dot-purple pl">Zbudowane w &lt;2 godziny</span>
+                </div>
+            </div>
+        </header>
 
-            <div class="process-steps">
-                <div class="card">
-                    <div class="step-number">1</div>
-                    <h3>Query the Vector DB</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                        Qdrant stores my project history, decisions, and technical context. Every chunk has metadata: dates, quality scores, sources.
-                    </p>
-                    <div class="step-code"><span class="fn">qdrant-find</span>(<span class="str">"project metrics LOC endpoints"</span>)
+        <main class="container">
+
+            <!-- ═══════════════════════════════════════════
+                 THE PROCESS
+                 ═══════════════════════════════════════════ -->
+            <section id="process">
+                <span class="section-label en">How this was built</span>
+                <span class="section-label pl">Jak to powstalo</span>
+                <h2 class="en">The Process</h2>
+                <h2 class="pl">Proces</h2>
+                <p class="en">Three steps. Real code. Real data. Zero hallucination.</p>
+                <p class="pl">Trzy kroki. Prawdziwy kod. Prawdziwe dane. Zero halucynacji.</p>
+
+                <div class="process-steps">
+                    <div class="card">
+                        <div class="step-number">1</div>
+                        <h3 class="en">Query the Vector DB</h3>
+                        <h3 class="pl">Zapytanie do bazy wektorowej</h3>
+                        <p class="en" style="font-size:0.9rem;color:var(--text-secondary)">
+                            Qdrant stores my project history, decisions, and technical context. Every chunk has metadata: dates, quality scores, sources.
+                        </p>
+                        <p class="pl" style="font-size:0.9rem;color:var(--text-secondary)">
+                            Qdrant przechowuje historie projektow, decyzje i kontekst techniczny. Kazdy chunk ma metadane: daty, oceny jakosci, zrodla.
+                        </p>
+                        <div class="step-code"><span class="fn">qdrant-find</span>(<span class="str">"project metrics LOC endpoints"</span>)
 <span class="fn">qdrant-find</span>(<span class="str">"sesja telerecepcja deploy"</span>)
 <span class="fn">qdrant-find</span>(<span class="str">"AI extraction Gemini prompt"</span>)
 <span class="comment">// 1,000+ chunks across 2 collections</span>
 <span class="comment">// projekt-claude-v3 + knowledge-base</span></div>
-                </div>
+                    </div>
 
-                <div class="card">
-                    <div class="step-number">2</div>
-                    <h3>Map Requirements</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                        Each CSHARK requirement was matched against retrieved evidence. Confidence scores reflect real overlap, not wishful thinking.
-                    </p>
-                    <div class="step-code"><span class="kw">for</span> req <span class="kw">in</span> cshark_requirements:
+                    <div class="card">
+                        <div class="step-number">2</div>
+                        <h3 class="en">Map Requirements</h3>
+                        <h3 class="pl">Mapowanie wymagan</h3>
+                        <p class="en" style="font-size:0.9rem;color:var(--text-secondary)">
+                            Each CSHARK requirement was matched against retrieved evidence. Confidence scores reflect real overlap, not wishful thinking.
+                        </p>
+                        <p class="pl" style="font-size:0.9rem;color:var(--text-secondary)">
+                            Kazde wymaganie CSHARK zostalo zmatchowane z pobranymi dowodami. Poziomy pewnosci odzwierciedlaja realne pokrycie, nie zyczeniowe myslenie.
+                        </p>
+                        <div class="step-code"><span class="kw">for</span> req <span class="kw">in</span> cshark_requirements:
   evidence = <span class="fn">qdrant-find</span>(req.query)
   confidence = <span class="fn">score</span>(
     evidence.quality,
@@ -649,458 +747,670 @@
     evidence.relevance
   )
 <span class="comment">// 8 requirements mapped below</span></div>
-                </div>
+                    </div>
 
-                <div class="card">
-                    <div class="step-number">3</div>
-                    <h3>Generate &amp; Ship</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                        Claude Code assembled this page from structured data. One HTML file. No framework, no build step. Deployed to GitHub Pages.
-                    </p>
-                    <div class="step-code"><span class="comment">// Claude Code session</span>
+                    <div class="card">
+                        <div class="step-number">3</div>
+                        <h3 class="en">Generate &amp; Ship</h3>
+                        <h3 class="pl">Generowanie i deploy</h3>
+                        <p class="en" style="font-size:0.9rem;color:var(--text-secondary)">
+                            Claude Code assembled this page from structured data. One HTML file. No framework, no build step. Deployed to GitHub Pages.
+                        </p>
+                        <p class="pl" style="font-size:0.9rem;color:var(--text-secondary)">
+                            Claude Code zbudowal ta strone ze strukturyzowanych danych. Jeden plik HTML. Bez frameworka, bez buildu. Deploy na GitHub Pages.
+                        </p>
+                        <div class="step-code"><span class="comment">// Claude Code session</span>
 <span class="fn">Read</span>(CLAUDE.md)     <span class="comment">// project IDs</span>
 <span class="fn">Read</span>(MEMORY.md)     <span class="comment">// lessons learned</span>
 <span class="fn">qdrant-find</span>(...)    <span class="comment">// deep context</span>
 <span class="fn">Write</span>(<span class="str">"index.html"</span>) <span class="comment">// this file</span>
 <span class="fn">git push</span> &rarr; <span class="str">live</span>   <span class="comment">// &lt;2 min</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════
-             REQUIREMENT MAPPING
-             ═══════════════════════════════════════════ -->
-        <section id="requirements">
-            <span class="section-label">Evidence-based matching</span>
-            <h2>Requirement Mapping</h2>
-            <p>Every CSHARK requirement, matched against real project data from my vector database.</p>
-
-            <div class="req-grid">
-                <!-- Req 1 -->
-                <div class="req-card">
-                    <span class="req-tag tag-green">Multi-context</span>
-                    <div class="req-requirement">"Comfortable switching between 3-4 parallel contexts"</div>
-                    <div class="req-evidence">
-                        Running 4 projects simultaneously since January 2026: <strong>TeleRecepcja</strong> (SaaS product), <strong>Car Flip Hunter</strong> (autonomous bot), <strong>Biuro Integrations</strong> (wFirma + n8n), and <strong>Knowledge Base</strong> (Qdrant + MCP). Each with its own stack, deploy pipeline, and active development.
                     </div>
-                    <div class="req-source">source: CLAUDE.md &middot; 70+ session logs</div>
-                    <div class="conf-label"><span>Confidence</span><span class="accent-green">98%</span></div>
-                    <div class="confidence-bar"><div class="confidence-fill" style="width:98%; background: var(--green);"></div></div>
                 </div>
+            </section>
 
-                <!-- Req 2 -->
-                <div class="req-card">
-                    <span class="req-tag tag-green">AI Daily</span>
-                    <div class="req-requirement">"Actively uses AI tools in daily work"</div>
-                    <div class="req-evidence">
-                        <strong>Claude Code</strong>: 70+ sessions, 14k LOC generated. <strong>Gemini</strong>: 5 model variants (2.0 Flash, 2.5 Flash, 3.0 Flash) for OCR, transcription, and extraction. <strong>Qdrant</strong> vector DB as persistent AI memory. <strong>Perplexity</strong> for research pipeline. <strong>MCP protocol</strong> connecting all tools.
+            <!-- ═══════════════════════════════════════════
+                 REQUIREMENT MAPPING
+                 ═══════════════════════════════════════════ -->
+            <section id="requirements">
+                <span class="section-label en">Evidence-based matching</span>
+                <span class="section-label pl">Dopasowanie oparte na dowodach</span>
+                <h2 class="en">Requirement Mapping</h2>
+                <h2 class="pl">Mapowanie wymagan</h2>
+                <p class="en">Every CSHARK requirement, matched against real project data from my vector database.</p>
+                <p class="pl">Kazde wymaganie CSHARK, zmatchowane z realnymi danymi projektowymi z mojej bazy wektorowej.</p>
+
+                <div class="req-grid">
+                    <!-- Req 1 -->
+                    <div class="req-card">
+                        <span class="req-tag tag-green">Multi-context</span>
+                        <div class="req-requirement en">"Comfortable switching between 3-4 parallel contexts"</div>
+                        <div class="req-requirement pl">"Komfortowe przelaczanie sie miedzy 3-4 kontekstami"</div>
+                        <div class="req-evidence en">
+                            Running 4 projects simultaneously since January 2026: <strong>TeleRecepcja</strong> (SaaS product), <strong>Car Flip Hunter</strong> (autonomous bot), <strong>Biuro Integrations</strong> (wFirma + n8n), and <strong>Knowledge Base</strong> (Qdrant + MCP). Each with its own stack, deploy pipeline, and active development.
+                        </div>
+                        <div class="req-evidence pl">
+                            4 projekty rownoczesnie od stycznia 2026: <strong>TeleRecepcja</strong> (produkt SaaS), <strong>Car Flip Hunter</strong> (autonomiczny bot), <strong>Biuro Integrations</strong> (wFirma + n8n) i <strong>Knowledge Base</strong> (Qdrant + MCP). Kazdy z wlasnym stackiem, pipeline deploymentu i aktywnym developmentem.
+                        </div>
+                        <div class="req-source">source: CLAUDE.md &middot; 70+ session logs</div>
+                        <div class="conf-label"><span>Confidence</span><span class="accent-green">98%</span></div>
+                        <div class="confidence-bar"><div class="confidence-fill" style="width:98%;background:var(--green)"></div></div>
                     </div>
-                    <div class="req-source">source: qdrant-find("AI tools daily usage") &middot; quality: gold</div>
-                    <div class="conf-label"><span>Confidence</span><span class="accent-green">99%</span></div>
-                    <div class="confidence-bar"><div class="confidence-fill" style="width:99%; background: var(--green);"></div></div>
-                </div>
 
-                <!-- Req 3 -->
-                <div class="req-card">
-                    <span class="req-tag tag-green">Prompting</span>
-                    <div class="req-requirement">"Can prompt effectively, iterate, and improve results"</div>
-                    <div class="req-evidence">
-                        Built a <strong>35-field JSON extraction</strong> prompt for Gemini that analyzes car listings. Optimized with <code>thinkingBudget: 0</code> to maximize output tokens. Cost: <strong>$0.00035/call</strong>. Documented 3 recurring prompt bugs (str.format + JSON braces) and built systematic fixes.
+                    <!-- Req 2 -->
+                    <div class="req-card">
+                        <span class="req-tag tag-green">AI Daily</span>
+                        <div class="req-requirement en">"Actively uses AI tools in daily work"</div>
+                        <div class="req-requirement pl">"Aktywnie korzysta z narzedzi AI w codziennej pracy"</div>
+                        <div class="req-evidence en">
+                            <strong>Claude Code</strong>: 70+ sessions, 14k LOC generated. <strong>Gemini</strong>: 5 model variants (2.0 Flash, 2.5 Flash, 3.0 Flash) for OCR, transcription, and extraction. <strong>Qdrant</strong> vector DB as persistent AI memory. <strong>Perplexity</strong> for research pipeline. <strong>MCP protocol</strong> connecting all tools.
+                        </div>
+                        <div class="req-evidence pl">
+                            <strong>Claude Code</strong>: 70+ sesji, 14k LOC wygenerowane. <strong>Gemini</strong>: 5 wariantow modeli (2.0 Flash, 2.5 Flash, 3.0 Flash) do OCR, transkrypcji i ekstrakcji. <strong>Qdrant</strong> jako trwala pamiec AI. <strong>Perplexity</strong> do pipeline'u research. <strong>Protokol MCP</strong> laczacy wszystkie narzedzia.
+                        </div>
+                        <div class="req-source">source: qdrant-find("AI tools daily usage") &middot; quality: gold</div>
+                        <div class="conf-label"><span>Confidence</span><span class="accent-green">99%</span></div>
+                        <div class="confidence-bar"><div class="confidence-fill" style="width:99%;background:var(--green)"></div></div>
                     </div>
-                    <div class="req-source">source: qdrant-find("Gemini extraction prompt optimization")</div>
-                    <div class="conf-label"><span>Confidence</span><span class="accent-green">95%</span></div>
-                    <div class="confidence-bar"><div class="confidence-fill" style="width:95%; background: var(--green);"></div></div>
-                </div>
 
-                <!-- Req 4 -->
-                <div class="req-card">
-                    <span class="req-tag tag-blue">Vibe-Coding</span>
-                    <div class="req-requirement">"Translate requirements into working PoC via vibe-coding"</div>
-                    <div class="req-evidence">
-                        My workflow: <strong>TASK-CARDS.md</strong> (requirements) &rarr; Claude Code subagent &rarr; working code. TeleRecepcja's 14,000 lines of production code were built this way. CLAUDE.md serves as persistent context (IDs, credentials, architecture decisions) across 70+ sessions.
+                    <!-- Req 3 -->
+                    <div class="req-card">
+                        <span class="req-tag tag-green">Prompting</span>
+                        <div class="req-requirement en">"Can prompt effectively, iterate, and improve results"</div>
+                        <div class="req-requirement pl">"Umie efektywnie promptowac, iterowac i poprawiac wyniki"</div>
+                        <div class="req-evidence en">
+                            Built a <strong>35-field JSON extraction</strong> prompt for Gemini that analyzes car listings. Optimized with <code>thinkingBudget: 0</code> to maximize output tokens. Cost: <strong>$0.00035/call</strong>. Documented 3 recurring prompt bugs (str.format + JSON braces) and built systematic fixes.
+                        </div>
+                        <div class="req-evidence pl">
+                            Zbudowalem <strong>prompt ekstrakcji 35 pol JSON</strong> dla Gemini do analizy ogloszen samochodowych. Zoptymalizowalem z <code>thinkingBudget: 0</code> zeby zmaksymalizowac tokeny wyjsciowe. Koszt: <strong>$0.00035/call</strong>. Udokumentowalem 3 powtarzajace sie bugi promptow (str.format + nawiasy JSON) i zbudowalem systemowe poprawki.
+                        </div>
+                        <div class="req-source">source: qdrant-find("Gemini extraction prompt optimization")</div>
+                        <div class="conf-label"><span>Confidence</span><span class="accent-green">95%</span></div>
+                        <div class="confidence-bar"><div class="confidence-fill" style="width:95%;background:var(--green)"></div></div>
                     </div>
-                    <div class="req-source">source: qdrant-find("vibe coding workflow TASK-CARDS")</div>
-                    <div class="conf-label"><span>Confidence</span><span class="accent-green">95%</span></div>
-                    <div class="confidence-bar"><div class="confidence-fill" style="width:95%; background: var(--green);"></div></div>
-                </div>
 
-                <!-- Req 5 -->
-                <div class="req-card">
-                    <span class="req-tag tag-blue">UI + AI</span>
-                    <div class="req-requirement">"Create simple UI drafts using AI tools"</div>
-                    <div class="req-evidence">
-                        Built <strong>55 React/TypeScript components</strong> with a complete design system in a single Claude Code session. Includes workshop dashboard, client management, job tracking, and SMS notification interfaces. Also: this very page &mdash; designed and generated by AI.
+                    <!-- Req 4 -->
+                    <div class="req-card">
+                        <span class="req-tag tag-blue">Vibe-Coding</span>
+                        <div class="req-requirement en">"Translate requirements into working PoC via vibe-coding"</div>
+                        <div class="req-requirement pl">"Tlumaczenie wymagan na dzialajacy PoC przez vibe-coding"</div>
+                        <div class="req-evidence en">
+                            My workflow: <strong>TASK-CARDS.md</strong> (requirements) &rarr; Claude Code subagent &rarr; working code. TeleRecepcja's 14,000 lines of production code were built this way. CLAUDE.md serves as persistent context (IDs, credentials, architecture decisions) across 70+ sessions.
+                        </div>
+                        <div class="req-evidence pl">
+                            Moj workflow: <strong>TASK-CARDS.md</strong> (wymagania) &rarr; subagent Claude Code &rarr; dzialajacy kod. 14 000 linii produkcyjnego kodu TeleRecepcji powstalo w ten sposob. CLAUDE.md sluzy jako trwaly kontekst (IDs, credentials, decyzje architektoniczne) przez 70+ sesji.
+                        </div>
+                        <div class="req-source">source: qdrant-find("vibe coding workflow TASK-CARDS")</div>
+                        <div class="conf-label"><span>Confidence</span><span class="accent-green">95%</span></div>
+                        <div class="confidence-bar"><div class="confidence-fill" style="width:95%;background:var(--green)"></div></div>
                     </div>
-                    <div class="req-source">source: qdrant-find("React components design system")</div>
-                    <div class="conf-label"><span>Confidence</span><span class="accent-blue">90%</span></div>
-                    <div class="confidence-bar"><div class="confidence-fill" style="width:90%; background: var(--blue);"></div></div>
-                </div>
 
-                <!-- Req 6 -->
-                <div class="req-card">
-                    <span class="req-tag tag-blue">Independence</span>
-                    <div class="req-requirement">"Independence, proactivity, ownership"</div>
-                    <div class="req-evidence">
-                        Self-taught the entire stack in 8 weeks: Python/FastAPI, React 19, PostgreSQL, Docker, Twilio, Gemini API, Qdrant, n8n. <strong>Gallup #1: Learner</strong>. No team, no manager, no external deadlines &mdash; all driven by internal motivation to ship.
+                    <!-- Req 5 -->
+                    <div class="req-card">
+                        <span class="req-tag tag-blue">UI + AI</span>
+                        <div class="req-requirement en">"Create simple UI drafts using AI tools"</div>
+                        <div class="req-requirement pl">"Tworzenie prostych UI draftow za pomoca narzedzi AI"</div>
+                        <div class="req-evidence en">
+                            Built <strong>55 React 19 / TypeScript components</strong> with a design system in a single Claude Code session: workshop dashboard, client management, job tracking, SMS notification UI. React SPA with Vite, served from FastAPI. Also: this very page &mdash; designed and generated by AI.
+                        </div>
+                        <div class="req-evidence pl">
+                            Zbudowalem <strong>55 komponentow React 19 / TypeScript</strong> z design systemem w jednej sesji Claude Code: dashboard warsztatu, zarzadzanie klientami, sledzenie zlecen, interfejs powiadomien SMS. React SPA z Vite, serwowany z FastAPI. Rowniez: ta strona &mdash; zaprojektowana i wygenerowana przez AI.
+                        </div>
+                        <div class="req-source">source: qdrant-find("React components design system")</div>
+                        <div class="conf-label"><span>Confidence</span><span class="accent-blue">90%</span></div>
+                        <div class="confidence-bar"><div class="confidence-fill" style="width:90%;background:var(--blue)"></div></div>
                     </div>
-                    <div class="req-source">source: MEMORY.md &middot; Gallup assessment</div>
-                    <div class="conf-label"><span>Confidence</span><span class="accent-green">95%</span></div>
-                    <div class="confidence-bar"><div class="confidence-fill" style="width:95%; background: var(--green);"></div></div>
-                </div>
 
-                <!-- Req 7 -->
-                <div class="req-card">
-                    <span class="req-tag tag-amber">SQL + SaaS</span>
-                    <div class="req-requirement">"SQL databases, SaaS products understanding"</div>
-                    <div class="req-evidence">
-                        <strong>PostgreSQL</strong>: 7 normalized tables with migrations, asyncpg connection pool, automated pg_dump backups every 6h to Backblaze B2. <strong>SQLite</strong> for Car Flip Hunter. TeleRecepcja is a <strong>multi-tenant SaaS</strong> with workshop onboarding, billing model, and per-tenant isolation.
+                    <!-- Req 6 -->
+                    <div class="req-card">
+                        <span class="req-tag tag-blue">Independence</span>
+                        <div class="req-requirement en">"Independence, proactivity, ownership"</div>
+                        <div class="req-requirement pl">"Samodzielnosc, proaktywnosc, ownership"</div>
+                        <div class="req-evidence en">
+                            Self-taught the entire stack in 8 weeks: Python/FastAPI, React 19, PostgreSQL, Docker, Twilio, Gemini API, Qdrant, n8n. <strong>Gallup #1: Learner</strong>. No team, no manager, no external deadlines &mdash; all driven by internal motivation to ship.
+                        </div>
+                        <div class="req-evidence pl">
+                            Samodzielnie nauczylem sie calego stacka w 8 tygodni: Python/FastAPI, React 19, PostgreSQL, Docker, Twilio, Gemini API, Qdrant, n8n. <strong>Gallup #1: Learner</strong>. Bez zespolu, bez managera, bez zewnetrznych deadlinow &mdash; wszystko napedzane wewnetrzna motywacja do shippingu.
+                        </div>
+                        <div class="req-source">source: MEMORY.md &middot; Gallup assessment</div>
+                        <div class="conf-label"><span>Confidence</span><span class="accent-green">95%</span></div>
+                        <div class="confidence-bar"><div class="confidence-fill" style="width:95%;background:var(--green)"></div></div>
                     </div>
-                    <div class="req-source">source: qdrant-find("PostgreSQL SaaS multi-tenant")</div>
-                    <div class="conf-label"><span>Confidence</span><span class="accent-amber">85%</span></div>
-                    <div class="confidence-bar"><div class="confidence-fill" style="width:85%; background: var(--amber);"></div></div>
-                </div>
 
-                <!-- Req 8 -->
-                <div class="req-card">
-                    <span class="req-tag tag-green">Shipping</span>
-                    <div class="req-requirement">"Values shipping over endless analysis"</div>
-                    <div class="req-evidence">
-                        TeleRecepcja: <strong>v10.45 in 6 weeks</strong>. 68 deployments, zero critical production incidents. Conscious architectural decisions (e.g., dropping n8n for FastAPI when complexity demanded it). Car Flip Hunter: running autonomously in production every 30 minutes since February.
+                    <!-- Req 7 -->
+                    <div class="req-card">
+                        <span class="req-tag tag-amber">SQL + SaaS</span>
+                        <div class="req-requirement en">"SQL databases, SaaS products understanding"</div>
+                        <div class="req-requirement pl">"Rozumienie baz SQL i produktow SaaS"</div>
+                        <div class="req-evidence en">
+                            <strong>PostgreSQL</strong>: 7 normalized tables with migrations, asyncpg connection pool, automated pg_dump backups every 6h to Backblaze B2. <strong>SQLite</strong> for Car Flip Hunter. TeleRecepcja is a <strong>multi-tenant SaaS</strong> with workshop onboarding, billing model, and per-tenant isolation.
+                        </div>
+                        <div class="req-evidence pl">
+                            <strong>PostgreSQL</strong>: 7 znormalizowanych tabel z migracjami, connection pool asyncpg, automatyczne backupy pg_dump co 6h na Backblaze B2. <strong>SQLite</strong> dla Car Flip Hunter. TeleRecepcja to <strong>multi-tenant SaaS</strong> z onboardingiem warsztatow, modelem billingowym i izolacja per-tenant.
+                        </div>
+                        <div class="req-source">source: qdrant-find("PostgreSQL SaaS multi-tenant")</div>
+                        <div class="conf-label"><span>Confidence</span><span class="accent-amber">85%</span></div>
+                        <div class="confidence-bar"><div class="confidence-fill" style="width:85%;background:var(--amber)"></div></div>
                     </div>
-                    <div class="req-source">source: qdrant-find("deploy history production incidents")</div>
-                    <div class="conf-label"><span>Confidence</span><span class="accent-green">90%</span></div>
-                    <div class="confidence-bar"><div class="confidence-fill" style="width:90%; background: var(--green);"></div></div>
+
+                    <!-- Req 8 -->
+                    <div class="req-card">
+                        <span class="req-tag tag-green">Shipping</span>
+                        <div class="req-requirement en">"Values shipping over endless analysis"</div>
+                        <div class="req-requirement pl">"Ceni shippowanie nad niekonczona analize"</div>
+                        <div class="req-evidence en">
+                            TeleRecepcja: <strong>v10.45 in 6 weeks</strong>. 68 deployments, zero critical production incidents. Conscious architectural decisions (e.g., dropping n8n for FastAPI when complexity demanded it). Car Flip Hunter: running autonomously in production every 30 minutes since February.
+                        </div>
+                        <div class="req-evidence pl">
+                            TeleRecepcja: <strong>v10.45 w 6 tygodni</strong>. 68 deployow, zero krytycznych incydentow produkcyjnych. Swiadome decyzje architektoniczne (np. rezygnacja z n8n na rzecz FastAPI gdy zlozonosc tego wymagala). Car Flip Hunter: dziala autonomicznie na produkcji co 30 minut od lutego.
+                        </div>
+                        <div class="req-source">source: qdrant-find("deploy history production incidents")</div>
+                        <div class="conf-label"><span>Confidence</span><span class="accent-green">90%</span></div>
+                        <div class="confidence-bar"><div class="confidence-fill" style="width:90%;background:var(--green)"></div></div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ═══════════════════════════════════════════
-             PROJECT SHOWCASE
-             ═══════════════════════════════════════════ -->
-        <section id="projects">
-            <span class="section-label">What I've built</span>
-            <h2>Project Showcase</h2>
-            <p>Three production systems, built in parallel, in under 8 weeks.</p>
+            <!-- ═══════════════════════════════════════════
+                 PROJECT SHOWCASE
+                 ═══════════════════════════════════════════ -->
+            <section id="projects">
+                <span class="section-label en">What I've built</span>
+                <span class="section-label pl">Co zbudowalem</span>
+                <h2 class="en">Project Showcase</h2>
+                <h2 class="pl">Projekty</h2>
+                <p class="en">Three production systems, built in parallel, in under 8 weeks.</p>
+                <p class="pl">Trzy systemy produkcyjne, budowane rownolegle, w mniej niz 8 tygodni.</p>
 
-            <div class="project-grid">
-                <!-- TeleRecepcja -->
-                <div class="project-card">
-                    <div class="project-icon icon-green">&#9742;</div>
-                    <h3>TeleRecepcja</h3>
-                    <span class="req-tag tag-green" style="margin-bottom: 8px;">Production SaaS</span>
-                    <p class="project-desc">
-                        AI receptionist for auto workshops. Phone recording &rarr; Gemini transcription &rarr; structured extraction &rarr; SMS notification with magic link. Multi-tenant, RODO-compliant.
+                <div class="project-grid">
+                    <!-- TeleRecepcja -->
+                    <div class="project-card">
+                        <div class="project-icon icon-green">&#9742;</div>
+                        <h3>TeleRecepcja</h3>
+                        <span class="req-tag tag-green" style="margin-bottom:8px">Production SaaS</span>
+                        <p class="project-desc en">
+                            AI receptionist for auto workshops. Phone recording &rarr; Gemini transcription &rarr; structured extraction &rarr; SMS with magic link to React dashboard. Full-stack: Python FastAPI backend (47 endpoints) + React 19 SPA (55 components, TypeScript, Vite). Multi-tenant, RODO-compliant, Docker behind Traefik.
+                        </p>
+                        <p class="project-desc pl">
+                            AI recepcjonistka dla warsztatow samochodowych. Nagranie rozmowy &rarr; transkrypcja Gemini &rarr; ekstrakcja danych &rarr; SMS z magic linkiem do dashboardu React. Full-stack: backend Python FastAPI (47 endpointow) + React 19 SPA (55 komponentow, TypeScript, Vite). Multi-tenant, zgodny z RODO, Docker za Traefik.
+                        </p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <div class="metric-value accent-green">14k</div>
+                                <div class="metric-label en">Lines of code</div>
+                                <div class="metric-label pl">Linii kodu</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-green">47</div>
+                                <div class="metric-label">API endpoints</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-green">55</div>
+                                <div class="metric-label en">React components</div>
+                                <div class="metric-label pl">Komponentow React</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-green">v10.45</div>
+                                <div class="metric-label en">Current version</div>
+                                <div class="metric-label pl">Aktualna wersja</div>
+                            </div>
+                        </div>
+                        <div class="project-stack">
+                            <span class="stack-tag">Python</span>
+                            <span class="stack-tag">FastAPI</span>
+                            <span class="stack-tag">React 19</span>
+                            <span class="stack-tag">TypeScript</span>
+                            <span class="stack-tag">PostgreSQL</span>
+                            <span class="stack-tag">Twilio</span>
+                            <span class="stack-tag">Gemini AI</span>
+                            <span class="stack-tag">Docker</span>
+                            <span class="stack-tag">ElevenLabs TTS</span>
+                        </div>
+                    </div>
+
+                    <!-- Car Flip Hunter -->
+                    <div class="project-card">
+                        <div class="project-icon icon-blue">&#128663;</div>
+                        <h3>Car Flip Hunter</h3>
+                        <span class="req-tag tag-blue" style="margin-bottom:8px">Autonomous Bot</span>
+                        <p class="project-desc en">
+                            Automated car deal finder. Scrapes OTOMOTO every 30 min, scores via custom matrix (engine, km, year, body type), AI extracts 35 structured fields from descriptions using Gemini, alerts via Telegram. Dual-path analysis with regex fallback.
+                        </p>
+                        <p class="project-desc pl">
+                            Automatyczny wyszukiwacz okazji samochodowych. Scrapuje OTOMOTO co 30 min, ocenia wedlug wlasnej matrycy (silnik, km, rocznik, typ nadwozia), AI wyciaga 35 pol z opisow za pomoca Gemini, alerty przez Telegram. Dual-path analiza z regex fallbackiem.
+                        </p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <div class="metric-value accent-blue">2.7k</div>
+                                <div class="metric-label en">Lines of code</div>
+                                <div class="metric-label pl">Linii kodu</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-blue">661</div>
+                                <div class="metric-label en">Offers analyzed</div>
+                                <div class="metric-label pl">Ofert przeanalizowanych</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-blue">35</div>
+                                <div class="metric-label en">AI-extracted fields</div>
+                                <div class="metric-label pl">Pol AI extraction</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-blue">24/7</div>
+                                <div class="metric-label">Cron uptime</div>
+                            </div>
+                        </div>
+                        <div class="project-stack">
+                            <span class="stack-tag">Python</span>
+                            <span class="stack-tag">Gemini 3 Flash</span>
+                            <span class="stack-tag">SQLite</span>
+                            <span class="stack-tag">Telegram API</span>
+                            <span class="stack-tag">Cron</span>
+                        </div>
+                    </div>
+
+                    <!-- Biuro Integration -->
+                    <div class="project-card">
+                        <div class="project-icon icon-amber">&#128218;</div>
+                        <h3>Biuro Integration</h3>
+                        <span class="req-tag tag-amber" style="margin-bottom:8px">Workflow Automation</span>
+                        <p class="project-desc en">
+                            Accounting office automation. Optima &rarr; wFirma migration (109 invoices, 116k PLN). Multi-tenant n8n workflows with 3-header auth routing. OCR pipeline with Gemini. Knowledge base: 1,000+ chunks in Qdrant, accessible via MCP protocol.
+                        </p>
+                        <p class="project-desc pl">
+                            Automatyzacja biura ksiegowego. Migracja Optima &rarr; wFirma (109 faktur, 116k PLN). Multi-tenant workflow n8n z 3-naglowkowym routingiem auth. Pipeline OCR z Gemini. Baza wiedzy: 1000+ chunkow w Qdrant, dostepna przez protokol MCP.
+                        </p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <div class="metric-value accent-amber">147</div>
+                                <div class="metric-label en">API endpoints mapped</div>
+                                <div class="metric-label pl">Zmapowanych API</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-amber">11</div>
+                                <div class="metric-label en">n8n workflows</div>
+                                <div class="metric-label pl">Workflow n8n</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-amber">1k+</div>
+                                <div class="metric-label en">Knowledge chunks</div>
+                                <div class="metric-label pl">Chunkow wiedzy</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value accent-amber">109</div>
+                                <div class="metric-label en">Invoices migrated</div>
+                                <div class="metric-label pl">Faktur zmigrowanych</div>
+                            </div>
+                        </div>
+                        <div class="project-stack">
+                            <span class="stack-tag">n8n</span>
+                            <span class="stack-tag">wFirma API</span>
+                            <span class="stack-tag">Qdrant</span>
+                            <span class="stack-tag">MCP Protocol</span>
+                            <span class="stack-tag">Gemini OCR</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 LANGUAGE — THE HONEST SECTION
+                 ═══════════════════════════════════════════ -->
+            <section id="language">
+                <span class="section-label en">Transparency</span>
+                <span class="section-label pl">Transparentnosc</span>
+                <h2 class="en">On English: B1/B2 + AI = Effective C1</h2>
+                <h2 class="pl">O angielskim: B1/B2 + AI = efektywne C1</h2>
+
+                <div class="lang-honest">
+                    <p class="en">
+                        <strong>Honest disclosure:</strong> My conversational English is B1/B2, not C1. I could hide this behind a polished AI-written application (as you're reading now), but that would contradict the transparency this page is built on. Instead, I'll show you why it doesn't matter.
                     </p>
-                    <div class="project-metrics">
-                        <div class="metric">
-                            <div class="metric-value accent-green">14k</div>
-                            <div class="metric-label">Lines of code</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value accent-green">47</div>
-                            <div class="metric-label">API endpoints</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value accent-green">55</div>
-                            <div class="metric-label">React components</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value accent-green">v10.45</div>
-                            <div class="metric-label">Current version</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Car Flip Hunter -->
-                <div class="project-card">
-                    <div class="project-icon icon-blue">&#128663;</div>
-                    <h3>Car Flip Hunter</h3>
-                    <span class="req-tag tag-blue" style="margin-bottom: 8px;">Autonomous Bot</span>
-                    <p class="project-desc">
-                        Automated car deal finder. Scrapes listings every 30 min, scores via custom matrix (engine, km, year, body type), AI extracts 35 fields from descriptions, alerts via Telegram.
+                    <p class="pl">
+                        <strong>Uczciwe ujawnienie:</strong> Moj konwersacyjny angielski to B1/B2, nie C1. Moglbym to ukryc za wypolerowana aplikacja napisana przez AI (taka jak ta, ktora wlasnie czytasz), ale to zaprzeczaloby transparentnosci, na ktorej ta strona jest zbudowana. Zamiast tego pokaze, dlaczego to nie ma znaczenia.
                     </p>
-                    <div class="project-metrics">
-                        <div class="metric">
-                            <div class="metric-value accent-blue">2.7k</div>
-                            <div class="metric-label">Lines of code</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value accent-blue">661</div>
-                            <div class="metric-label">Offers analyzed</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value accent-blue">35</div>
-                            <div class="metric-label">AI-extracted fields</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value accent-blue">24/7</div>
-                            <div class="metric-label">Cron uptime</div>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Biuro Integration -->
-                <div class="project-card">
-                    <div class="project-icon icon-amber">&#128218;</div>
-                    <h3>Biuro Integration</h3>
-                    <span class="req-tag tag-amber" style="margin-bottom: 8px;">Workflow Automation</span>
-                    <p class="project-desc">
-                        Accounting office automation. Optima &rarr; wFirma migration (109 invoices). Multi-tenant n8n workflows. OCR pipeline with Gemini. Knowledge base with 1,000+ chunks in Qdrant.
+                <div class="lang-card">
+                    <h3 class="en">My daily English workflow — already working</h3>
+                    <h3 class="pl">Moj codzienny workflow z angielskim — juz dziala</h3>
+
+                    <div class="lang-flow">
+                        <span class="lang-flow-step en">English docs / API refs</span>
+                        <span class="lang-flow-step pl">Ang. docs / API refs</span>
+                        <span class="lang-flow-arrow">&rarr;</span>
+                        <span class="lang-flow-step en">I read &amp; understand natively</span>
+                        <span class="lang-flow-step pl">Czytam i rozumiem natywnie</span>
+                        <span class="lang-flow-arrow">&rarr;</span>
+                        <span class="lang-flow-step en">Code &amp; commit in English</span>
+                        <span class="lang-flow-step pl">Kod i commity po angielsku</span>
+                    </div>
+
+                    <p class="en" style="font-size:0.9rem;margin-bottom:16px">
+                        100% of my code, commits, documentation, and CLAUDE.md is written in English. All Gemini prompts, API integrations, and technical communication happens in English. Reading comprehension is native-level — I consume English content exclusively for all technical work.
                     </p>
-                    <div class="project-metrics">
-                        <div class="metric">
-                            <div class="metric-value accent-amber">147</div>
-                            <div class="metric-label">API endpoints mapped</div>
+                    <p class="pl" style="font-size:0.9rem;margin-bottom:16px">
+                        100% mojego kodu, commitow, dokumentacji i CLAUDE.md jest pisane po angielsku. Wszystkie prompty Gemini, integracje API i komunikacja techniczna odbywa sie po angielsku. Zrozumienie tekstu jest na poziomie natywnym — cala wiedze techniczna konsumuje wylacznie po angielsku.
+                    </p>
+
+                    <h3 class="en" style="margin-top:24px">For calls: AI-augmented communication</h3>
+                    <h3 class="pl" style="margin-top:24px">Na callach: komunikacja wspomagana AI</h3>
+
+                    <div class="lang-flow">
+                        <span class="lang-flow-step en">Video call (English)</span>
+                        <span class="lang-flow-step pl">Video call (angielski)</span>
+                        <span class="lang-flow-arrow">&rarr;</span>
+                        <span class="lang-flow-step en">Live transcription</span>
+                        <span class="lang-flow-step pl">Transkrypcja live</span>
+                        <span class="lang-flow-arrow">&rarr;</span>
+                        <span class="lang-flow-step en">AI extracts action items</span>
+                        <span class="lang-flow-step pl">AI wyciaga akcje do zrobienia</span>
+                        <span class="lang-flow-arrow">&rarr;</span>
+                        <span class="lang-flow-step en">Structured follow-up</span>
+                        <span class="lang-flow-step pl">Strukturalny follow-up</span>
+                    </div>
+
+                    <p class="en" style="font-size:0.9rem;margin-bottom:16px">
+                        This isn't hypothetical — it's the same pipeline I built for TeleRecepcja. Phone recording &rarr; Gemini transcription &rarr; AI extraction of key data. I use this technology in production daily. Applying it to my own calls is trivial.
+                    </p>
+                    <p class="pl" style="font-size:0.9rem;margin-bottom:16px">
+                        To nie jest hipoteza — to ten sam pipeline, ktory zbudowalem dla TeleRecepcji. Nagranie rozmowy &rarr; transkrypcja Gemini &rarr; AI extraction kluczowych danych. Uzywam tej technologii na produkcji codziennie. Zastosowanie jej do wlasnych callidziala analogicznie.
+                    </p>
+                </div>
+
+                <div class="lang-card" style="margin-top:16px; border-color: rgba(34, 197, 94, 0.3);">
+                    <h3 class="en accent-green">The proof is this page</h3>
+                    <h3 class="pl accent-green">Dowodem jest ta strona</h3>
+                    <p class="en" style="font-size:0.9rem">
+                        You're reading this in English — toggle to Polish with the switch in the top-right corner. Both versions were generated from the same data, in the same session, by the same AI agent I use daily. Written communication in English is already solved. Verbal communication is augmented by the exact product I'm building. A Product Owner who has built their own AI communication pipeline is more valuable than one who simply passed a C1 exam.
+                    </p>
+                    <p class="pl" style="font-size:0.9rem">
+                        Czytasz to po angielsku — przelacz na polski przyciskiem w prawym gornym rogu. Obie wersje powstaly z tych samych danych, w tej samej sesji, przez tego samego agenta AI, ktorego uzywam codziennie. Pisemna komunikacja po angielsku jest juz rozwiazana. Werbalna komunikacja jest wspomagana dokladnie przez produkt, ktory buduje. Product Owner, ktory zbudowal wlasny pipeline komunikacji AI, jest cenniejszy niz ten, ktory po prostu zdal egzamin C1.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 BUILD TIMELINE
+                 ═══════════════════════════════════════════ -->
+            <section id="timeline">
+                <span class="section-label en">From zero to production</span>
+                <span class="section-label pl">Od zera do produkcji</span>
+                <h2 class="en">Build Timeline</h2>
+                <h2 class="pl">Oś czasu</h2>
+                <p class="en">8 weeks. All dates from Qdrant metadata and git history.</p>
+                <p class="pl">8 tygodni. Wszystkie daty z metadanych Qdrant i historii git.</p>
+
+                <div class="timeline">
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-green"></div>
+                        <div class="tl-date">Jan 12, 2026</div>
+                        <div class="tl-title en">Infrastructure bootstrap</div>
+                        <div class="tl-title pl">Bootstrap infrastruktury</div>
+                        <div class="tl-desc en">VPS provisioned, n8n deployed, MCP protocol configured, Qdrant vector database initialized.</div>
+                        <div class="tl-desc pl">VPS postawiony, n8n wdrozony, protokol MCP skonfigurowany, baza wektorowa Qdrant zainicjalizowana.</div>
+                    </div>
+
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-green"></div>
+                        <div class="tl-date">Jan 22, 2026</div>
+                        <div class="tl-title en">wFirma API fully mapped</div>
+                        <div class="tl-title pl">wFirma API w pelni zmapowane</div>
+                        <div class="tl-desc en">147 API endpoints documented. Multi-tenant routing with 3 separate auth header sets. XML request format reverse-engineered.</div>
+                        <div class="tl-desc pl">147 endpointow API udokumentowanych. Multi-tenant routing z 3 oddzielnymi zestawami naglowkow auth. Format XML zrewersowany.</div>
+                    </div>
+
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-blue"></div>
+                        <div class="tl-date">Feb 01, 2026</div>
+                        <div class="tl-title en">Multi-MCP architecture deployed</div>
+                        <div class="tl-title pl">Architektura Multi-MCP wdrozona</div>
+                        <div class="tl-desc en">4 always-on MCP servers + on-demand groups (n8n, data, infra). Toggle system with PowerShell scripts.</div>
+                        <div class="tl-desc pl">4 serwery MCP always-on + grupy on-demand (n8n, data, infra). System przelaczania skryptami PowerShell.</div>
+                    </div>
+
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-blue"></div>
+                        <div class="tl-date">Feb 13, 2026</div>
+                        <div class="tl-title en">TeleRecepcja v1.0 shipped</div>
+                        <div class="tl-title pl">TeleRecepcja v1.0 wyslana</div>
+                        <div class="tl-desc en">FastAPI + PostgreSQL + Twilio. Conscious decision to drop n8n &mdash; complexity demanded a proper codebase, not visual workflows.</div>
+                        <div class="tl-desc pl">FastAPI + PostgreSQL + Twilio. Swiadoma decyzja o rezygnacji z n8n &mdash; zlozonosc wymagala porzadnego kodu, nie wizualnych workflow.</div>
+                    </div>
+
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-purple"></div>
+                        <div class="tl-date">Feb 17, 2026</div>
+                        <div class="tl-title en">React 19 SPA &mdash; 55 components in 1 day</div>
+                        <div class="tl-title pl">React 19 SPA &mdash; 55 komponentow w 1 dzien</div>
+                        <div class="tl-desc en">Full frontend: workshop dashboard, client management with phone-as-key, job tracking with status flow, SMS notification interface. Vite build, TypeScript, served from FastAPI static.</div>
+                        <div class="tl-desc pl">Pelny frontend: dashboard warsztatu, zarzadzanie klientami (telefon jako klucz), sledzenie zlecen ze statusami, interfejs powiadomien SMS. Build Vite, TypeScript, serwowany z FastAPI static.</div>
+                    </div>
+
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-purple"></div>
+                        <div class="tl-date">Feb 23, 2026</div>
+                        <div class="tl-title en">TeleRecepcja v10.45 &mdash; Pilot Ready</div>
+                        <div class="tl-title pl">TeleRecepcja v10.45 &mdash; Gotowa na pilota</div>
+                        <div class="tl-desc en">RODO compliance complete, 30/33 QA bugs fixed, 68 deployments, zero critical production incidents. Ready for first paying customer.</div>
+                        <div class="tl-desc pl">Zgodnosc RODO kompletna, 30/33 bugow QA naprawionych, 68 deployow, zero krytycznych incydentow. Gotowa na pierwszego placaacego klienta.</div>
+                    </div>
+
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-amber"></div>
+                        <div class="tl-date">Mar 01, 2026</div>
+                        <div class="tl-title en">AI extraction &mdash; Gemini 3 Flash</div>
+                        <div class="tl-title pl">AI extraction &mdash; Gemini 3 Flash</div>
+                        <div class="tl-desc en">35-field structured extraction from car listings. Dual-path analysis: AI scoring + regex fallback. Cost: $0.00035/call.</div>
+                        <div class="tl-desc pl">Ekstrakcja 35 pol z ogloszen samochodowych. Dual-path analiza: scoring AI + regex fallback. Koszt: $0.00035/call.</div>
+                    </div>
+
+                    <div class="tl-item tl-item-current">
+                        <div class="tl-dot tl-dot-green"></div>
+                        <div class="tl-date">Mar 02, 2026</div>
+                        <div class="tl-title accent-green en">This application &mdash; generated from vector DB</div>
+                        <div class="tl-title accent-green pl">Ta aplikacja &mdash; wygenerowana z bazy wektorowej</div>
+                        <div class="tl-desc en">Qdrant queries &rarr; Claude Code &rarr; self-contained HTML with EN/PL toggle. The medium is the message.</div>
+                        <div class="tl-desc pl">Zapytania Qdrant &rarr; Claude Code &rarr; self-contained HTML z przelacznikiem EN/PL. Medium jest przekazem.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 TECHNOLOGY GRID
+                 ═══════════════════════════════════════════ -->
+            <section id="tech">
+                <span class="section-label">Stack</span>
+                <h2 class="en">Technology Proficiency</h2>
+                <h2 class="pl">Bieglosc technologiczna</h2>
+                <p class="en">All learned and applied in production within the last 8 weeks.</p>
+                <p class="pl">Wszystko nauczone i zastosowane na produkcji w ciagu ostatnich 8 tygodni.</p>
+
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <span class="tech-name">Python / FastAPI</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div>
                         </div>
-                        <div class="metric">
-                            <div class="metric-value accent-amber">11</div>
-                            <div class="metric-label">n8n workflows</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value accent-amber">1k+</div>
-                            <div class="metric-label">Knowledge chunks</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value accent-amber">109</div>
-                            <div class="metric-label">Invoices migrated</div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">React 19 / TypeScript</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot"></div>
                         </div>
                     </div>
+                    <div class="tech-item">
+                        <span class="tech-name">PostgreSQL</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div><div class="tech-dot"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">Claude Code / AI Agents</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">Gemini API (5 models)</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">Qdrant / Vector DB</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">n8n / Workflow</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">Docker / Linux / VPS</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div><div class="tech-dot"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">Twilio / Telephony</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">Prompt Engineering</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">MCP Protocol</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">Git / CI-CD</span>
+                        <div class="tech-level">
+                            <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div><div class="tech-dot"></div>
+                        </div>
+                    </div>
                 </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 THE META
+                 ═══════════════════════════════════════════ -->
+            <section id="meta">
+                <span class="section-label en">The point</span>
+                <span class="section-label pl">Sedno</span>
+                <h2 class="en">The Meta</h2>
+                <h2 class="pl">Meta</h2>
+
+                <div class="meta-quote">
+                    <p class="en">
+                        This is not a CV. This is a demonstration.<br><br>
+                        You asked for someone who "actively uses AI tools" and "vibe-codes requirements into working prototypes."
+                        Rather than claiming these skills on paper, I made the application process itself prove them.<br><br>
+                        Every data point on this page was retrieved from a vector database I built and maintain.
+                        The page was generated by an AI agent I configure and orchestrate daily.
+                        The infrastructure hosting it is the same stack I use for production SaaS.
+                        Even the language barrier section above was addressed by the same technology I ship to customers.<br><br>
+                        The medium is the message.
+                    </p>
+                    <p class="pl">
+                        To nie jest CV. To jest demonstracja.<br><br>
+                        Szukacie kogos, kto "aktywnie uzywa narzedzi AI" i "vibe-koduje wymagania w dzialajace prototypy."
+                        Zamiast deklarowac te umiejetnosci na papierze, sprawilem, ze sam proces aplikacji je udowadnia.<br><br>
+                        Kazdy punkt danych na tej stronie zostal pobrany z bazy wektorowej, ktora zbudowalem i utrzymuje.
+                        Strona zostala wygenerowana przez agenta AI, ktorego konfiguruje i orkiestruje codziennie.
+                        Infrastruktura hostujaca to ten sam stack, ktorego uzywam do produkcyjnego SaaS.
+                        Nawet sekcja o barierze jezykowej powyzej zostala zaadresowana ta sama technologia, ktora dostarczam klientom.<br><br>
+                        Medium jest przekazem.
+                    </p>
+                    <div class="attribution">&mdash; Generated by Claude Code from Qdrant vector DB &middot; March 2, 2026</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 GALLUP
+                 ═══════════════════════════════════════════ -->
+            <section id="gallup">
+                <span class="section-label en">Working style</span>
+                <span class="section-label pl">Styl pracy</span>
+                <h2 class="en">Gallup CliftonStrengths &mdash; TOP 5</h2>
+                <h2 class="pl">Gallup CliftonStrengths &mdash; TOP 5</h2>
+                <p class="en">How my natural talents map to the Product Owner role.</p>
+                <p class="pl">Jak moje naturalne talenty mapuja sie na role Product Ownera.</p>
+
+                <div class="gallup-grid">
+                    <div class="gallup-card">
+                        <div class="gallup-rank">#1</div>
+                        <h3 class="gallup-name accent-green">Learner</h3>
+                        <p class="gallup-desc en">Self-taught full stack in 8 weeks. New domain? I'll own it by next sprint.</p>
+                        <p class="gallup-desc pl">Samodzielnie nauczylem sie full stacka w 8 tygodni. Nowa domena? Bede ja ogarnial do nastepnego sprintu.</p>
+                    </div>
+                    <div class="gallup-card">
+                        <div class="gallup-rank">#2</div>
+                        <h3 class="gallup-name accent-blue">Analytical</h3>
+                        <p class="gallup-desc en">Data-driven decisions. Confidence bars on this page are not decoration &mdash; they're methodology.</p>
+                        <p class="gallup-desc pl">Decyzje oparte na danych. Paski pewnosci na tej stronie to nie dekoracja &mdash; to metodologia.</p>
+                    </div>
+                    <div class="gallup-card">
+                        <div class="gallup-rank">#3</div>
+                        <h3 class="gallup-name accent-amber">Input</h3>
+                        <p class="gallup-desc en">1,000+ knowledge chunks. I collect, organize, and retrieve context. Perfect for multi-project PO.</p>
+                        <p class="gallup-desc pl">1000+ chunkow wiedzy. Zbieram, organizuje i odzyskuje kontekst. Idealne dla PO wielu projektow.</p>
+                    </div>
+                    <div class="gallup-card">
+                        <div class="gallup-rank">#4</div>
+                        <h3 class="gallup-name accent-purple">Context</h3>
+                        <p class="gallup-desc en">I understand why before deciding what. Session logs, decision history &mdash; every choice is traceable.</p>
+                        <p class="gallup-desc pl">Rozumiem "dlaczego" zanim decyduje "co". Logi sesji, historia decyzji &mdash; kazdy wybor jest sledzialny.</p>
+                    </div>
+                    <div class="gallup-card">
+                        <div class="gallup-rank">#5</div>
+                        <h3 class="gallup-name" style="color:var(--red)">Ideation</h3>
+                        <p class="gallup-desc en">Connecting dots across domains. TeleRecepcja was born from researching 25 industries &mdash; finding the non-obvious opportunity.</p>
+                        <p class="gallup-desc pl">Laczenie kropek miedzy domenami. TeleRecepcja powstala z researchu 25 branz &mdash; znalezienie nieoczywistej szansy.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 CONTACT
+                 ═══════════════════════════════════════════ -->
+            <section id="contact">
+                <span class="section-label en">Let's talk</span>
+                <span class="section-label pl">Porozmawiajmy</span>
+                <h2 class="en">Contact</h2>
+                <h2 class="pl">Kontakt</h2>
+                <p class="en">Available for a conversation about how AI changes the Product Owner role.</p>
+                <p class="pl">Dostepny na rozmowe o tym, jak AI zmienia role Product Ownera.</p>
+
+                <div class="contact-bar">
+                    <div class="contact-item"><strong>Email:</strong> piotr.sobczak@odok.pl</div>
+                    <div class="contact-item"><strong>Phone:</strong> +48 530 212 221</div>
+                    <div class="contact-item"><strong>Location:</strong> Remote (Poland)</div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <div class="container">
+                <p class="en">Built with Claude Code + Qdrant &middot; Zero JavaScript &middot; EN/PL toggle is pure CSS</p>
+                <p class="pl">Zbudowane z Claude Code + Qdrant &middot; Zero JavaScriptu &middot; Przelacznik EN/PL to czysty CSS</p>
+                <p style="margin-top:4px" class="en">Source data: 1,000+ vector DB chunks &middot; 70+ AI sessions &middot; 8 weeks of production work</p>
+                <p style="margin-top:4px" class="pl">Dane zrodlowe: 1000+ chunkow bazy wektorowej &middot; 70+ sesji AI &middot; 8 tygodni pracy produkcyjnej</p>
             </div>
-        </section>
+        </footer>
 
-        <!-- ═══════════════════════════════════════════
-             BUILD TIMELINE
-             ═══════════════════════════════════════════ -->
-        <section id="timeline">
-            <span class="section-label">From zero to production</span>
-            <h2>Build Timeline</h2>
-            <p>8 weeks. All dates from Qdrant metadata and git history.</p>
-
-            <div class="timeline">
-                <div class="tl-item">
-                    <div class="tl-dot tl-dot-green"></div>
-                    <div class="tl-date">Jan 12, 2026</div>
-                    <div class="tl-title">Infrastructure bootstrap</div>
-                    <div class="tl-desc">VPS provisioned, n8n deployed, MCP protocol configured, Qdrant vector database initialized.</div>
-                </div>
-
-                <div class="tl-item">
-                    <div class="tl-dot tl-dot-green"></div>
-                    <div class="tl-date">Jan 22, 2026</div>
-                    <div class="tl-title">wFirma API fully mapped</div>
-                    <div class="tl-desc">147 API endpoints documented. Multi-tenant routing with 3 separate auth header sets. XML request format reverse-engineered.</div>
-                </div>
-
-                <div class="tl-item">
-                    <div class="tl-dot tl-dot-blue"></div>
-                    <div class="tl-date">Feb 01, 2026</div>
-                    <div class="tl-title">Multi-MCP architecture deployed</div>
-                    <div class="tl-desc">4 always-on MCP servers + on-demand groups (n8n, data, infra). Toggle system with PowerShell scripts.</div>
-                </div>
-
-                <div class="tl-item">
-                    <div class="tl-dot tl-dot-blue"></div>
-                    <div class="tl-date">Feb 13, 2026</div>
-                    <div class="tl-title">TeleRecepcja v1.0 shipped</div>
-                    <div class="tl-desc">FastAPI + PostgreSQL + Twilio integration. Conscious decision to skip n8n &mdash; complexity demanded a proper codebase.</div>
-                </div>
-
-                <div class="tl-item">
-                    <div class="tl-dot tl-dot-purple"></div>
-                    <div class="tl-date">Feb 17, 2026</div>
-                    <div class="tl-title">React 19 migration &mdash; 55 components in 1 day</div>
-                    <div class="tl-desc">Full frontend: workshop dashboard, client management, job tracking, SMS interface. Design system with consistent theming.</div>
-                </div>
-
-                <div class="tl-item">
-                    <div class="tl-dot tl-dot-purple"></div>
-                    <div class="tl-date">Feb 23, 2026</div>
-                    <div class="tl-title">TeleRecepcja v10.45 &mdash; Pilot Ready</div>
-                    <div class="tl-desc">RODO compliance, 30/33 QA bugs fixed, 68 deployments, zero critical production incidents. Ready for first paying customer.</div>
-                </div>
-
-                <div class="tl-item">
-                    <div class="tl-dot tl-dot-amber"></div>
-                    <div class="tl-date">Mar 01, 2026</div>
-                    <div class="tl-title">AI extraction &mdash; Gemini 3 Flash</div>
-                    <div class="tl-desc">35-field structured extraction from car listings. Dual-path analysis: AI scoring + regex fallback. Cost: $0.00035/call.</div>
-                </div>
-
-                <div class="tl-item tl-item-current">
-                    <div class="tl-dot tl-dot-green"></div>
-                    <div class="tl-date">Mar 02, 2026</div>
-                    <div class="tl-title accent-green">This application &mdash; generated from vector DB</div>
-                    <div class="tl-desc">Qdrant queries &rarr; Claude Code &rarr; self-contained HTML. The medium is the message.</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════
-             TECHNOLOGY GRID
-             ═══════════════════════════════════════════ -->
-        <section id="tech">
-            <span class="section-label">Stack</span>
-            <h2>Technology Proficiency</h2>
-            <p>All learned and applied in production within the last 8 weeks.</p>
-
-            <div class="tech-grid">
-                <div class="tech-item">
-                    <span class="tech-name">Python / FastAPI</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">React / TypeScript</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">PostgreSQL</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div><div class="tech-dot"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">Claude Code / AI Agents</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">Gemini API</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">Qdrant / Vector DB</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">n8n / Workflow Automation</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">Docker / Linux / VPS</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div><div class="tech-dot"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">Twilio / Telephony</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">Git / CI/CD</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div><div class="tech-dot"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">MCP Protocol</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div>
-                    </div>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-name">Prompt Engineering</span>
-                    <div class="tech-level">
-                        <div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot filled"></div><div class="tech-dot half"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════
-             THE META
-             ═══════════════════════════════════════════ -->
-        <section id="meta">
-            <span class="section-label">The point</span>
-            <h2>The Meta</h2>
-
-            <div class="meta-quote">
-                <p>
-                    This is not a CV. This is a demonstration.<br><br>
-                    You asked for someone who "actively uses AI tools" and "vibe-codes requirements into working prototypes."
-                    Rather than claiming these skills on paper, I made the application process itself prove them.<br><br>
-                    Every data point on this page was retrieved from a vector database I built and maintain.
-                    The page was generated by an AI agent I configured and orchestrate daily.
-                    The infrastructure hosting it is the same stack I use for production SaaS.<br><br>
-                    The medium is the message.
-                </p>
-                <div class="attribution">&mdash; Generated by Claude Code from Qdrant vector DB &middot; March 2, 2026</div>
-            </div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════
-             GALLUP
-             ═══════════════════════════════════════════ -->
-        <section id="gallup">
-            <span class="section-label">Working style</span>
-            <h2>Gallup CliftonStrengths &mdash; TOP 5</h2>
-            <p>How my natural talents map to the Product Owner role.</p>
-
-            <div class="gallup-grid">
-                <div class="gallup-card">
-                    <div class="gallup-rank">#1</div>
-                    <h3 class="gallup-name accent-green">Learner</h3>
-                    <p class="gallup-desc">Self-taught full stack in 8 weeks. New domain? I'll own it by next sprint.</p>
-                </div>
-                <div class="gallup-card">
-                    <div class="gallup-rank">#2</div>
-                    <h3 class="gallup-name accent-blue">Analytical</h3>
-                    <p class="gallup-desc">Data-driven decisions. Confidence bars on this page are not decoration &mdash; they're methodology.</p>
-                </div>
-                <div class="gallup-card">
-                    <div class="gallup-rank">#3</div>
-                    <h3 class="gallup-name accent-amber">Input</h3>
-                    <p class="gallup-desc">1,000+ knowledge chunks. I collect, organize, and retrieve context. Perfect for multi-project PO.</p>
-                </div>
-                <div class="gallup-card">
-                    <div class="gallup-rank">#4</div>
-                    <h3 class="gallup-name accent-purple">Context</h3>
-                    <p class="gallup-desc">I understand why before deciding what. Session logs, decision history &mdash; every choice is traceable.</p>
-                </div>
-                <div class="gallup-card">
-                    <div class="gallup-rank">#5</div>
-                    <h3 class="gallup-name" style="color: var(--red);">Ideation</h3>
-                    <p class="gallup-desc">Connecting dots across domains. TeleRecepcja was born from researching 25 industries &mdash; finding the non-obvious opportunity.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════
-             CONTACT
-             ═══════════════════════════════════════════ -->
-        <section id="contact">
-            <span class="section-label">Let's talk</span>
-            <h2>Contact</h2>
-            <p>Available for a conversation about how AI changes the Product Owner role.</p>
-
-            <div class="contact-bar">
-                <div class="contact-item"><strong>Email:</strong> piotr.sobczak@odok.pl</div>
-                <div class="contact-item"><strong>Phone:</strong> +48 530 212 221</div>
-                <div class="contact-item"><strong>Location:</strong> Remote (Poland)</div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>Built with Claude Code + Qdrant &middot; Zero JavaScript &middot; Self-contained HTML</p>
-            <p style="margin-top: 4px;">Source data: 1,000+ vector DB chunks &middot; 70+ AI sessions &middot; 8 weeks of production work</p>
-        </div>
-    </footer>
+    </div><!-- /.page-wrap -->
 
 </body>
 </html>
