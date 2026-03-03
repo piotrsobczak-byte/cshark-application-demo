@@ -848,12 +848,12 @@
                         <div class="req-requirement en">"SQL databases, SaaS products understanding"</div>
                         <div class="req-requirement pl">"Rozumienie baz SQL i produktow SaaS"</div>
                         <div class="req-evidence en">
-                            <strong>PostgreSQL</strong>: 7 normalized tables with migrations, asyncpg connection pool, automated pg_dump backups every 6h to Backblaze B2. <strong>SQLite</strong> for Car Flip Hunter. TeleRecepcja is a <strong>multi-tenant SaaS</strong> with workshop onboarding, billing model, and per-tenant isolation.
+                            Projects built on both <strong>SQLite</strong> (Car Flip Hunter) and <strong>PostgreSQL</strong> (TeleRecepcja). I care about security and data integrity &mdash; automated backups, proper migrations, input validation. I don't have production experience at scale yet, and I know that. I'm open to guidance from the team and I know when to ask for help. TeleRecepcja is a <strong>multi-tenant SaaS</strong> &mdash; I built the architecture, but I'd welcome a senior review before scaling.
                         </div>
                         <div class="req-evidence pl">
-                            <strong>PostgreSQL</strong>: 7 znormalizowanych tabel z migracjami, connection pool asyncpg, automatyczne backupy pg_dump co 6h na Backblaze B2. <strong>SQLite</strong> dla Car Flip Hunter. TeleRecepcja to <strong>multi-tenant SaaS</strong> z onboardingiem warsztatow, modelem billingowym i izolacja per-tenant.
+                            Projekty zbudowane na <strong>SQLite</strong> (Car Flip Hunter) i <strong>PostgreSQL</strong> (TeleRecepcja). Zalezy mi na bezpieczenstwie i integralnosci danych &mdash; automatyczne backupy, poprawne migracje, walidacja danych wejsciowych. Nie mam jeszcze doswiadczenia produkcyjnego na duzej skali i jestem tego swiadomy. Chetnie skorzystam z sugestii zespolu i wiem, kiedy potrzebuje pomocy. TeleRecepcja to <strong>multi-tenant SaaS</strong> &mdash; zbudowalem architekture, ale przed skalowaniem chetnie poddalbym ja review seniora.
                         </div>
-                        <div class="req-source">source: qdrant-find("PostgreSQL SaaS multi-tenant")</div>
+                        <div class="req-source">source: project architecture &middot; git history</div>
                         <span class="evidence-tag evidence-moderate">Moderate evidence</span>
                     </div>
 
@@ -863,12 +863,12 @@
                         <div class="req-requirement en">"Values shipping over endless analysis"</div>
                         <div class="req-requirement pl">"Ceni shippowanie nad niekonczona analize"</div>
                         <div class="req-evidence en">
-                            TeleRecepcja: <strong>v10.45 in 6 weeks</strong>. 68 deployments, zero critical production incidents. Conscious architectural decisions (e.g., dropping n8n for FastAPI when complexity demanded it). Car Flip Hunter: running autonomously in production every 30 minutes since February.
+                            I ship iteratively and learn from each deployment. TeleRecepcja went from idea to production pilot in <strong>6 weeks</strong>. When n8n became a bottleneck, I migrated to FastAPI &mdash; because shipping means making hard decisions, not just pushing code. Car Flip Hunter has been running autonomously every 30 minutes since February.
                         </div>
                         <div class="req-evidence pl">
-                            TeleRecepcja: <strong>v10.45 w 6 tygodni</strong>. 68 deployow, zero krytycznych incydentow produkcyjnych. Swiadome decyzje architektoniczne (np. rezygnacja z n8n na rzecz FastAPI gdy zlozonosc tego wymagala). Car Flip Hunter: dziala autonomicznie na produkcji co 30 minut od lutego.
+                            Shippuje iteracyjnie i ucze sie z kazdego wdrozenia. TeleRecepcja przeszla od pomyslu do pilota produkcyjnego w <strong>6 tygodni</strong>. Gdy n8n stal sie waskim gardlem, zmigrowalem na FastAPI &mdash; bo shippowanie to podejmowanie trudnych decyzji, nie tylko pushowanie kodu. Car Flip Hunter dziala autonomicznie co 30 minut od lutego.
                         </div>
-                        <div class="req-source">source: qdrant-find("deploy history production incidents")</div>
+                        <div class="req-source">source: git history &middot; deploy logs</div>
                         <span class="evidence-tag evidence-strong">Strong evidence</span>
                     </div>
                 </div>
@@ -889,10 +889,10 @@
                     <div class="req-card">
                         <span class="req-tag tag-green">E-commerce</span>
                         <div class="req-evidence en">
-                            <strong>8+ years</strong> running my own e-commerce business. Importing apparel from Canada, selling on <strong>Allegro</strong> and <strong>Shopper</strong>. Managing <strong>15+ employees</strong>, warehouse operations, supply chain logistics. From sourcing to last-mile delivery &mdash; end-to-end ownership.
+                            <strong>8+ years</strong> running my own e-commerce business. Integrating online stores and sales platforms through <strong>Baselinker</strong>. Managing <strong>15 employees</strong>, warehouse operations with <strong>lean management</strong> and <strong>5S methodology</strong>. Supply chain logistics, standardized processes and procedures at every workstation. What drives me most: process optimization, automation, eliminating waste.
                         </div>
                         <div class="req-evidence pl">
-                            <strong>8+ lat</strong> prowadzenia wlasnego biznesu e-commerce. Import odziezy z Kanady, sprzedaz na <strong>Allegro</strong> i <strong>Shopper</strong>. Zarzadzanie <strong>15+ pracownikami</strong>, operacje magazynowe, logistyka lancucha dostaw. Od sourcingu do last-mile delivery &mdash; pelna odpowiedzialnosc end-to-end.
+                            <strong>8+ lat</strong> prowadzenia wlasnego biznesu e-commerce. Integracja sklepow internetowych i platform sprzedazowych przez <strong>Baselinkera</strong>. Zarzadzanie <strong>15 pracownikami</strong>, operacje magazynowe z <strong>lean management</strong> i <strong>metodologia 5S</strong>. Logistyka lancucha dostaw, wystandaryzowane procesy i procedury na kazdym stanowisku pracy. Co mnie napedza: optymalizacja procesow, automatyzacja, eliminowanie strat.
                         </div>
                     </div>
                     <div class="req-card">
@@ -943,10 +943,10 @@
                         <h3>TeleRecepcja</h3>
                         <span class="req-tag tag-green" style="margin-bottom:8px">Production SaaS</span>
                         <p class="project-desc en">
-                            <strong>Voice-first CRM</strong> for auto workshops. Not just transcription &mdash; a complete job management system. A mechanic with dirty hands doesn't need to type anything: accept a job, edit details, add notes, send SMS &mdash; all by voice. Phone recording &rarr; Gemini transcription &rarr; AI extraction &rarr; SMS with magic link to React dashboard. Full-stack: Python FastAPI + React 19 SPA. Multi-tenant, RODO-compliant, 19-item backlog for scale.
+                            <strong>Voice-first CRM</strong> for auto workshops. A mechanic with dirty hands doesn't need to type anything. The full pipeline: <strong>phone call &rarr; transcription &rarr; structured JSON extraction &rarr; data lands in CRM</strong>. Client name, car details, job description &mdash; all extracted automatically from a single conversation. SMS with magic link lets the mechanic review and confirm on a React dashboard. Full-stack: Python FastAPI + React 19 SPA. Multi-tenant, RODO-compliant.
                         </p>
                         <p class="project-desc pl">
-                            <strong>Voice-first CRM</strong> dla warsztatow samochodowych. Nie tylko transkrypcja &mdash; pelny obieg zlecen. Mechanik z brudnymi rekami nie musi niczego pisac: przyjecie zlecenia, edycja, notatki, SMS &mdash; wszystko glosem. Nagranie rozmowy &rarr; transkrypcja Gemini &rarr; ekstrakcja AI &rarr; SMS z magic linkiem do dashboardu React. Full-stack: Python FastAPI + React 19 SPA. Multi-tenant, zgodny z RODO, backlog 19 pozycji na skalowanie.
+                            <strong>Voice-first CRM</strong> dla warsztatow samochodowych. Mechanik z brudnymi rekami nie musi niczego pisac. Pelny pipeline: <strong>rozmowa telefoniczna &rarr; transkrypcja &rarr; strukturalny JSON (extraction) &rarr; dane trafiaja do CRM-a</strong>. Imie klienta, dane auta, opis zlecenia &mdash; wszystko wyciagane automatycznie z jednej rozmowy. SMS z magic linkiem pozwala mechanikowi przejrzec i potwierdzic na dashboardzie React. Full-stack: Python FastAPI + React 19 SPA. Multi-tenant, zgodny z RODO.
                         </p>
                         <div class="project-metrics">
                             <div class="metric">
