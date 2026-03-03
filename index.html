@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,24 +98,24 @@
         /* Toggle input is visually hidden via inline styles for a11y */
 
         /* Default: Polish visible, English hidden */
-        .en { display: none !important; }
-        .pl { }
+        .pl { display: none !important; }
+        .en { }
 
-        /* When checked: English visible, Polish hidden */
-        #lang-toggle:checked ~ .page-wrap .en { display: revert !important; }
-        #lang-toggle:checked ~ .page-wrap .pl { display: none !important; }
+        /* When checked: Polish visible, English hidden */
+        #lang-toggle:checked ~ .page-wrap .pl { display: revert !important; }
+        #lang-toggle:checked ~ .page-wrap .en { display: none !important; }
 
         /* Block-level elements */
-        #lang-toggle:checked ~ .page-wrap .en.block { display: block !important; }
-        #lang-toggle:checked ~ .page-wrap .pl.block { display: none !important; }
+        #lang-toggle:checked ~ .page-wrap .pl.block { display: block !important; }
+        #lang-toggle:checked ~ .page-wrap .en.block { display: none !important; }
 
         /* Grid items */
-        #lang-toggle:checked ~ .page-wrap .en.grid-item { display: flex !important; }
-        #lang-toggle:checked ~ .page-wrap .pl.grid-item { display: none !important; }
+        #lang-toggle:checked ~ .page-wrap .pl.grid-item { display: flex !important; }
+        #lang-toggle:checked ~ .page-wrap .en.grid-item { display: none !important; }
 
         /* Flex items */
-        #lang-toggle:checked ~ .page-wrap .en.flex-item { display: flex !important; }
-        #lang-toggle:checked ~ .page-wrap .pl.flex-item { display: none !important; }
+        #lang-toggle:checked ~ .page-wrap .pl.flex-item { display: flex !important; }
+        #lang-toggle:checked ~ .page-wrap .en.flex-item { display: none !important; }
 
         /* Toggle switch styling */
         .lang-switch {
@@ -150,11 +150,11 @@
         .lang-switch .flag-pl { transition: opacity 0.2s; }
 
         /* EN active state (default) */
-        .lang-switch .flag-en { opacity: 0.4; }
-        .lang-switch .flag-pl { opacity: 1; }
+        .lang-switch .flag-en { opacity: 1; }
+        .lang-switch .flag-pl { opacity: 0.4; }
         .lang-switch .slider {
             width: 28px; height: 16px;
-            background: var(--green);
+            background: var(--blue);
             border-radius: 8px;
             position: relative;
             transition: background 0.2s;
@@ -165,14 +165,14 @@
             width: 12px; height: 12px;
             background: var(--text-primary);
             border-radius: 50%;
-            top: 2px; left: 2px;
+            top: 2px; left: 12px;
             transition: transform 0.2s;
         }
-        /* EN active state (when toggled — slider moves right toward EN) */
-        #lang-toggle:checked ~ .page-wrap .lang-switch .flag-en { opacity: 1; }
-        #lang-toggle:checked ~ .page-wrap .lang-switch .flag-pl { opacity: 0.4; }
-        #lang-toggle:checked ~ .page-wrap .lang-switch .slider { background: var(--blue); }
-        #lang-toggle:checked ~ .page-wrap .lang-switch .slider::after { transform: translateX(12px); }
+        /* PL active state (when toggled — slider moves left toward PL) */
+        #lang-toggle:checked ~ .page-wrap .lang-switch .flag-en { opacity: 0.4; }
+        #lang-toggle:checked ~ .page-wrap .lang-switch .flag-pl { opacity: 1; }
+        #lang-toggle:checked ~ .page-wrap .lang-switch .slider { background: var(--green); }
+        #lang-toggle:checked ~ .page-wrap .lang-switch .slider::after { transform: translateX(-12px); }
 
         /* ═══════════════════════════════════════════
            LAYOUT
@@ -1469,7 +1469,7 @@
 
     <script>
     document.getElementById('lang-toggle').addEventListener('change', function() {
-        document.documentElement.lang = this.checked ? 'en' : 'pl';
+        document.documentElement.lang = this.checked ? 'pl' : 'en';
         this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
     });
     </script>
