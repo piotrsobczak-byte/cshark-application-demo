@@ -34,6 +34,13 @@
             "LLM workflows"
         ],
         "url": "https://piotrsobczak-byte.github.io/cshark-application",
+        "email": "piotr.sobczak@odok.pl",
+        "telephone": "+48530212221",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bielsko-Biala",
+            "addressCountry": "PL"
+        },
         "sameAs": "https://github.com/piotrsobczak-byte"
     }
     </script>
@@ -45,25 +52,25 @@
             --bg-primary: #0a0a0f;
             --bg-secondary: #12121a;
             --bg-card: #16161f;
-            --bg-card-hover: #1a1a25;
+            --bg-card-hover: #1e1e2d;
             --border: #2a2a3a;
             --border-subtle: #1e1e2e;
             --text-primary: #e4e4e7;
             --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
+            --text-muted: #8a8a94;
             --green: #22c55e;
             --green-dim: #16a34a;
             --green-bg: rgba(34, 197, 94, 0.08);
-            --blue: #3b82f6;
-            --blue-dim: #2563eb;
+            --blue: #60a5fa;
+            --blue-dim: #3b82f6;
             --blue-bg: rgba(59, 130, 246, 0.08);
             --amber: #f59e0b;
             --amber-dim: #d97706;
             --amber-bg: rgba(245, 158, 11, 0.08);
-            --purple: #a855f7;
-            --purple-dim: #9333ea;
+            --purple: #c084fc;
+            --purple-dim: #a855f7;
             --purple-bg: rgba(168, 85, 247, 0.08);
-            --red: #ef4444;
+            --red: #f87171;
             --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
             --max-w: 980px;
@@ -88,7 +95,7 @@
         /* ═══════════════════════════════════════════
            LANGUAGE TOGGLE (pure CSS checkbox hack)
            ═══════════════════════════════════════════ */
-        #lang-toggle { display: none; }
+        /* Toggle input is visually hidden via inline styles for a11y */
 
         /* Default: Polish visible, English hidden */
         .en { display: none !important; }
@@ -120,7 +127,7 @@
             align-items: center;
             gap: 10px;
             background: rgba(22, 22, 31, 0.9);
-            border: 1px solid var(--green);
+            border: 1px solid var(--border);
             border-radius: 100px;
             padding: 8px 18px;
             cursor: pointer;
@@ -131,12 +138,13 @@
             user-select: none;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            box-shadow: 0 0 12px rgba(34, 197, 94, 0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .lang-switch:hover {
             background: var(--bg-card-hover);
             border-color: var(--green);
             color: var(--text-primary);
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.15);
         }
         .lang-switch .flag-en,
         .lang-switch .flag-pl { transition: opacity 0.2s; }
@@ -183,8 +191,8 @@
         /* ═══════════════════════════════════════════
            TYPOGRAPHY
            ═══════════════════════════════════════════ */
-        h1 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; }
-        h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
+        h1 { font-size: 2.75rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; }
+        h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; }
         h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 8px; }
         p { color: var(--text-secondary); }
         a { color: var(--blue); text-decoration: none; }
@@ -263,45 +271,7 @@
             padding: 24px;
             transition: background 0.2s;
         }
-        .card:hover { background: var(--bg-card-hover); }
-
-        /* ═══════════════════════════════════════════
-           PROCESS SECTION
-           ═══════════════════════════════════════════ */
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 32px;
-        }
-        .step-number {
-            display: inline-flex;
-            align-items: center; justify-content: center;
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            background: var(--green-bg);
-            border: 1px solid rgba(34, 197, 94, 0.25);
-            color: var(--green);
-            font-weight: 700; font-size: 0.875rem;
-            margin-bottom: 12px;
-        }
-        .step-code {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 12px 16px;
-            margin-top: 12px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            overflow-x: auto;
-            white-space: pre;
-            line-height: 1.6;
-        }
-        .step-code .fn { color: var(--blue); }
-        .step-code .str { color: var(--green); }
-        .step-code .comment { color: var(--text-muted); }
-        .step-code .kw { color: var(--purple); }
+        .card:hover { background: var(--bg-card-hover); border-color: rgba(255,255,255,0.12); }
 
         /* ═══════════════════════════════════════════
            REQUIREMENT CARDS
@@ -316,14 +286,14 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 20px 24px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-        .req-card:hover { background: var(--bg-card-hover); }
+        .req-card:hover { background: var(--bg-card-hover); border-color: rgba(255,255,255,0.12); }
         .req-tag {
-            font-size: 0.7rem; font-weight: 600;
+            font-size: 0.75rem; font-weight: 600;
             text-transform: uppercase; letter-spacing: 0.08em;
             padding: 3px 10px; border-radius: 100px;
             display: inline-block; width: fit-content;
@@ -390,7 +360,7 @@
             display: flex;
             flex-direction: column;
         }
-        .project-card:hover { background: var(--bg-card-hover); }
+        .project-card:hover { background: var(--bg-card-hover); border-color: rgba(255,255,255,0.12); }
         .project-icon {
             width: 40px; height: 40px;
             border-radius: var(--radius);
@@ -421,10 +391,10 @@
         .metric-value {
             font-family: var(--font-mono);
             font-weight: 700;
-            font-size: 1.125rem;
+            font-size: 1rem;
         }
         .metric-label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -436,7 +406,7 @@
             gap: 6px;
         }
         .stack-tag {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             padding: 2px 8px;
             border-radius: 4px;
             background: var(--bg-primary);
@@ -529,7 +499,6 @@
         .tech-bar-fill {
             height: 100%;
             border-radius: 2px;
-            transition: width 0.3s;
         }
         .tech-bar-fill.bar-green { background: var(--green); }
         .tech-bar-fill.bar-blue { background: var(--blue); }
@@ -610,7 +579,7 @@
            ═══════════════════════════════════════════ */
         .gallup-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
             margin-top: 32px;
         }
@@ -662,28 +631,72 @@
         footer p + p { margin-top: 4px; }
 
         /* ═══════════════════════════════════════════
+           ACCESSIBILITY
+           ═══════════════════════════════════════════ */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            background: var(--green);
+            color: var(--bg-primary);
+            padding: 8px 16px;
+            font-weight: 700;
+            z-index: 9999;
+            text-decoration: none;
+            border-radius: 0 0 var(--radius) 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 3px;
+            border-radius: 3px;
+        }
+
+        /* ═══════════════════════════════════════════
            RESPONSIVE
            ═══════════════════════════════════════════ */
         @media (max-width: 768px) {
-            h1 { font-size: 1.6rem; }
+            h1 { font-size: 1.875rem; }
             h2 { font-size: 1.25rem; }
             section { padding: 48px 0; }
-            .hero { padding: 56px 0 48px; }
-            .process-steps,
+            .hero { padding: 76px 0 48px; }
             .req-grid,
             .project-grid { grid-template-columns: 1fr; }
             .gallup-grid { grid-template-columns: repeat(2, 1fr); }
             .gallup-grid > :last-child { grid-column: 1 / -1; }
-            .hero-meta { flex-direction: column; gap: 8px; }
+            .hero-meta { flex-direction: column; gap: 8px; align-items: center; }
             .contact-bar { flex-direction: column; align-items: center; gap: 12px; }
             .tech-grid { grid-template-columns: 1fr; }
-            .lang-switch { top: 8px; right: 8px; font-size: 0.8rem; padding: 6px 14px; }
+            .lang-switch {
+                top: 8px; right: 8px; font-size: 0.8rem;
+                padding: 10px 16px; min-height: 44px;
+                backdrop-filter: none; -webkit-backdrop-filter: none;
+                background: rgba(22, 22, 31, 0.97);
+            }
             .lang-flow { flex-direction: column; align-items: flex-start; }
+            .lang-flow-arrow { transform: rotate(90deg); display: block; margin: 2px 12px; }
         }
 
         @media (max-width: 480px) {
             .container { padding: 0 16px; }
+            .hero { padding: 80px 0 40px; }
             .gallup-grid { grid-template-columns: 1fr; }
+            .meta-quote { padding: 16px 20px; }
+        }
+
+        @media (max-width: 400px) {
+            .project-metrics { grid-template-columns: 1fr; }
         }
 
         /* ═══════════════════════════════════════════
@@ -707,21 +720,29 @@
             a { color: #111; text-decoration: underline; }
             .meta-quote { border-left-color: #333; background: #f5f5f5; }
             .lang-switch { display: none; }
-            /* Print both languages */
+            /* Print English version */
             .pl { display: none !important; }
-            .en { display: revert !important; }
+            .en { display: block !important; }
+            .en.flex-item { display: flex !important; }
+            .en.grid-item { display: flex !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- CSS-only language toggle: checkbox outside .page-wrap so :checked ~ works -->
-    <input type="checkbox" id="lang-toggle">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Language toggle: checkbox outside .page-wrap so :checked ~ works -->
+    <input type="checkbox" id="lang-toggle"
+           role="switch"
+           aria-checked="false"
+           aria-label="Switch language: Polish / English"
+           style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
 
     <div class="page-wrap">
 
         <!-- Fixed language toggle button -->
-        <label for="lang-toggle" class="lang-switch">
+        <label for="lang-toggle" class="lang-switch" aria-hidden="true">
             <span class="flag-pl">PL</span>
             <span class="slider"></span>
             <span class="flag-en">EN</span>
@@ -732,45 +753,33 @@
              ═══════════════════════════════════════════ -->
         <header class="hero">
             <div class="container">
-                <div class="hero-badge en">qdrant-find("CSHARK requirements") &rarr; AI-generated application</div>
-                <div class="hero-badge pl">qdrant-find("CSHARK requirements") &rarr; aplikacja wygenerowana przez AI</div>
+                <div class="hero-badge en">AI-powered application &middot; built from real project data</div>
+                <div class="hero-badge pl">Aplikacja napedzana AI &middot; zbudowana z rzeczywistych danych projektowych</div>
                 <h1>
                     <span class="name">Piotr Sobczak</span><br>
                     <span class="en">Product Owner Application</span>
                     <span class="pl">Aplikacja na Product Ownera</span>
                 </h1>
                 <p class="hero-sub en">
-                    This page was generated by an AI agent querying my vector database, drawing from real project logs and git history.
-                    I wanted to let the process speak for itself.
+                    8+ years running a business, 5 parallel projects in production, AI as a daily tool.
+                    This page was built the same way I build products: data in, structure out, iterate until it ships.
                 </p>
                 <p class="hero-sub pl">
-                    Ta strona zostala wygenerowana przez agenta AI odpytujacego moja baze wektorowa, korzystajac z rzeczywistych logow projektowych i historii git.
-                    Chcialem pozwolic procesowi mowic za siebie.
+                    8+ lat prowadzenia firmy, 5 projektow na produkcji, AI jako codzienne narzedzie.
+                    Ta strona powstala tak samo jak buduje produkty: dane na wejsciu, struktura na wyjsciu, iteracja az do shipu.
                 </p>
                 <div class="hero-meta">
-                    <span class="dot-green en">Claude Code &middot; daily driver</span>
-                    <span class="dot-green pl">Claude Code &middot; codzienne narzedzie</span>
-                    <span class="dot-blue en">15 specialized AI workflows</span>
-                    <span class="dot-blue pl">15 wyspecjalizowanych workflow AI</span>
-                    <span class="dot-amber en">5 parallel projects</span>
-                    <span class="dot-amber pl">5 projektow rownolegle</span>
+                    <span class="dot-green en">8+ years business owner</span>
+                    <span class="dot-green pl">8+ lat wlasciciel firmy</span>
+                    <span class="dot-blue en">5 parallel projects in production</span>
+                    <span class="dot-blue pl">5 projektow na produkcji</span>
+                    <span class="dot-amber en">AI tools &middot; daily driver</span>
+                    <span class="dot-amber pl">Narzedzia AI &middot; codziennie</span>
                 </div>
             </div>
         </header>
 
-        <main class="container">
-
-            <!-- ═══════════════════════════════════════════
-                 THE PROCESS
-                 ═══════════════════════════════════════════ -->
-            <section id="process">
-                <span class="section-label en">How this was built</span>
-                <span class="section-label pl">Jak to powstalo</span>
-                <h2 class="en">How This Page Was Made</h2>
-                <h2 class="pl">Jak powstala ta strona</h2>
-                <p class="en">All data on this page comes from a vector database (Qdrant) where I store project history, decisions, and technical context. Each CSHARK requirement was matched against real evidence, then Claude Code assembled this HTML and deployed it to GitHub Pages. The workflow mirrors how I approach product work: gather data, structure the chaos, define scope, iterate in sprints.</p>
-                <p class="pl">Wszystkie dane na tej stronie pochodza z bazy wektorowej (Qdrant), w ktorej przechowuje historie projektow, decyzje i kontekst techniczny. Kazde wymaganie CSHARK zostalo zmatchowane z realnymi dowodami, nastepnie Claude Code zbudowal ten HTML i zdployowal na GitHub Pages. Workflow odzwierciedla moje podejscie do pracy produktowej: zbierz dane, ustrukturyzuj chaos, zdefiniuj scope, iteruj w sprintach.</p>
-            </section>
+        <main class="container" id="main-content">
 
             <!-- ═══════════════════════════════════════════
                  REQUIREMENT MAPPING
@@ -971,7 +980,7 @@
                 <div class="project-grid">
                     <!-- TeleRecepcja -->
                     <div class="project-card">
-                        <div class="project-icon icon-green">&#9742;</div>
+                        <div class="project-icon icon-green" aria-hidden="true">&#9742;</div>
                         <h3>TeleRecepcja</h3>
                         <span class="req-tag tag-green" style="margin-bottom:8px">Production SaaS</span>
                         <p class="project-desc en">
@@ -982,17 +991,17 @@
                         </p>
                         <div class="project-metrics">
                             <div class="metric">
-                                <div class="metric-value accent-green" style="font-size:0.9rem">Full-stack</div>
+                                <div class="metric-value accent-green">Full-stack</div>
                                 <div class="metric-label en">Production SaaS</div>
                                 <div class="metric-label pl">Produkcyjny SaaS</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-value accent-green" style="font-size:0.9rem">RESTful API</div>
+                                <div class="metric-value accent-green">RESTful API</div>
                                 <div class="metric-label en">Auth, telephony, SMS, jobs</div>
                                 <div class="metric-label pl">Auth, telefonia, SMS, zlecenia</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-value accent-green" style="font-size:0.9rem">React SPA</div>
+                                <div class="metric-value accent-green">React SPA</div>
                                 <div class="metric-label en">TypeScript dashboard</div>
                                 <div class="metric-label pl">Dashboard TypeScript</div>
                             </div>
@@ -1017,7 +1026,7 @@
 
                     <!-- Car Flip Hunter -->
                     <div class="project-card">
-                        <div class="project-icon icon-blue">&#128663;</div>
+                        <div class="project-icon icon-blue" aria-hidden="true">&#128663;</div>
                         <h3>Car Flip Hunter</h3>
                         <span class="req-tag tag-blue" style="margin-bottom:8px">Autonomous Bot</span>
                         <p class="project-desc en">
@@ -1028,12 +1037,12 @@
                         </p>
                         <div class="project-metrics">
                             <div class="metric">
-                                <div class="metric-value accent-blue" style="font-size:0.9rem">Autonomous</div>
+                                <div class="metric-value accent-blue">Autonomous</div>
                                 <div class="metric-label en">Python bot</div>
                                 <div class="metric-label pl">Bot Python</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-value accent-blue" style="font-size:0.85rem">Every 30 min</div>
+                                <div class="metric-value accent-blue">Every 30 min</div>
                                 <div class="metric-label en">Runs on production</div>
                                 <div class="metric-label pl">Dziala na produkcji</div>
                             </div>
@@ -1059,7 +1068,7 @@
 
                     <!-- Biuro Integration -->
                     <div class="project-card">
-                        <div class="project-icon icon-amber">&#128218;</div>
+                        <div class="project-icon icon-amber" aria-hidden="true">&#128218;</div>
                         <h3>Biuro Integration</h3>
                         <span class="req-tag tag-amber" style="margin-bottom:8px">Workflow Automation</span>
                         <p class="project-desc en">
@@ -1070,7 +1079,7 @@
                         </p>
                         <div class="project-metrics">
                             <div class="metric">
-                                <div class="metric-value accent-amber" style="font-size:0.85rem">wFirma API</div>
+                                <div class="metric-value accent-amber">wFirma API</div>
                                 <div class="metric-label en">Full integration</div>
                                 <div class="metric-label pl">Pelna integracja</div>
                             </div>
@@ -1085,7 +1094,7 @@
                                 <div class="metric-label pl">Chunkow wiedzy</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-value accent-amber" style="font-size:0.85rem">OCR</div>
+                                <div class="metric-value accent-amber">OCR</div>
                                 <div class="metric-label en">Custom pipeline</div>
                                 <div class="metric-label pl">Wlasny pipeline</div>
                             </div>
@@ -1101,9 +1110,9 @@
 
                     <!-- TrenerPartner -->
                     <div class="project-card">
-                        <div class="project-icon" style="background:var(--purple-bg);border:1px solid rgba(168,85,247,0.2)">&#127947;</div>
+                        <div class="project-icon" aria-hidden="true" style="background:var(--purple-bg);border:1px solid rgba(192,132,252,0.2)">&#127947;</div>
                         <h3>TrenerPartner.pl</h3>
-                        <span class="req-tag tag-purple" style="margin-bottom:8px">Auto-pilot (frozen)</span>
+                        <span class="req-tag tag-purple" style="margin-bottom:8px">Data-driven pivot</span>
                         <p class="project-desc en">
                             My first landing page, <strong>built in 1 day</strong> purely for data collection. B2B lead generation for personal trainers. 120 qualified leads collected, 20 social media posts generated and scheduled via Postiz. Consciously frozen after market analysis (25 industries) revealed 24x lower revenue per client vs TeleRecepcja. A data-driven pivot decision.
                         </p>
@@ -1127,9 +1136,9 @@
                                 <div class="metric-label pl">Ratio pivotu</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-value accent-purple">&#10003;</div>
-                                <div class="metric-label en">Data-driven kill</div>
-                                <div class="metric-label pl">Kill oparty na danych</div>
+                                <div class="metric-value accent-purple" aria-hidden="true">&#10003;</div>
+                                <div class="metric-label en">Data-driven decision</div>
+                                <div class="metric-label pl">Decyzja oparta na danych</div>
                             </div>
                         </div>
                         <div class="project-stack">
@@ -1209,6 +1218,15 @@
                 <p class="pl">8 tygodni. Wszystkie daty z metadanych Qdrant i historii git.</p>
 
                 <div class="timeline">
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-amber"></div>
+                        <div class="tl-date">2014 - 2025</div>
+                        <div class="tl-title en">E-commerce business, 15 employees</div>
+                        <div class="tl-title pl">Firma e-commerce, 15 pracownikow</div>
+                        <div class="tl-desc en">8+ years running my own business. Baselinker integrations, warehouse operations, lean management, 5S. Process optimization at every workstation. The foundation for everything below.</div>
+                        <div class="tl-desc pl">8+ lat prowadzenia wlasnej firmy. Integracje Baselinker, operacje magazynowe, lean management, 5S. Optymalizacja procesow na kazdym stanowisku. Fundament dla wszystkiego ponizej.</div>
+                    </div>
+
                     <div class="tl-item">
                         <div class="tl-dot tl-dot-green"></div>
                         <div class="tl-date">Jan 12, 2026</div>
@@ -1296,11 +1314,12 @@
                  TECHNOLOGY GRID
                  ═══════════════════════════════════════════ -->
             <section id="tech">
-                <span class="section-label">Stack</span>
+                <span class="section-label en">Stack</span>
+                <span class="section-label pl">Stack</span>
                 <h2 class="en">Technology Proficiency</h2>
                 <h2 class="pl">Bieglosc technologiczna</h2>
-                <p class="en">What I can deliver with Claude Code as my AI pair-programmer. Not raw skill, effective output with AI assistance.</p>
-                <p class="pl">Co jestem w stanie dostarczyc z Claude Code jako moim AI pair-programmerem. Nie surowy skill, efektywny output z pomoca AI.</p>
+                <p class="en">What I can deliver with Claude Code as my AI pair-programmer. Not raw coding skill. Effective output with AI assistance.</p>
+                <p class="pl">Co jestem w stanie dostarczyc z Claude Code jako moim AI pair-programmerem. Nie surowy coding skill. Efektywny output z pomoca AI.</p>
 
                 <div class="tech-grid">
                     <div class="tech-item">
@@ -1314,22 +1333,12 @@
                         <span class="tech-context">model selection per task, OCR, transcription, extraction</span>
                     </div>
                     <div class="tech-item">
-                        <div class="tech-header"><span class="tech-name">Qdrant / Vector DB</span><span class="tech-level">4/5</span></div>
-                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-green" style="width:80%"></div></div>
-                        <span class="tech-context">10k+ chunks, semantic search, MCP integration</span>
-                    </div>
-                    <div class="tech-item">
                         <div class="tech-header"><span class="tech-name">Prompt Engineering</span><span class="tech-level">4/5</span></div>
                         <div class="tech-bar-bg"><div class="tech-bar-fill bar-green" style="width:80%"></div></div>
                         <span class="tech-context">structured extraction, iterative refinement, multi-model</span>
                     </div>
                     <div class="tech-item">
-                        <div class="tech-header"><span class="tech-name">MCP Protocol</span><span class="tech-level">4/5</span></div>
-                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-blue" style="width:80%"></div></div>
-                        <span class="tech-context">4 servers always-on, on-demand groups</span>
-                    </div>
-                    <div class="tech-item">
-                        <div class="tech-header"><span class="tech-name">n8n / Workflow</span><span class="tech-level">4/5</span></div>
+                        <div class="tech-header"><span class="tech-name">n8n / Workflow Automation</span><span class="tech-level">4/5</span></div>
                         <div class="tech-bar-bg"><div class="tech-bar-fill bar-green" style="width:80%"></div></div>
                         <span class="tech-context">11 production workflows, multi-tenant routing</span>
                     </div>
@@ -1339,29 +1348,14 @@
                         <span class="tech-context">AI-assisted, 14k LOC in production</span>
                     </div>
                     <div class="tech-item">
-                        <div class="tech-header"><span class="tech-name">Twilio / Telephony</span><span class="tech-level">3.5/5</span></div>
-                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-blue" style="width:70%"></div></div>
-                        <span class="tech-context">voice, SMS, webhooks, signature validation</span>
+                        <div class="tech-header"><span class="tech-name">React / TypeScript</span><span class="tech-level">3/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-blue" style="width:60%"></div></div>
+                        <span class="tech-context">AI-assisted, SPA dashboard with design system</span>
                     </div>
                     <div class="tech-item">
-                        <div class="tech-header"><span class="tech-name">React 19 / TypeScript</span><span class="tech-level">3/5</span></div>
+                        <div class="tech-header"><span class="tech-name">SQL (PostgreSQL, SQLite)</span><span class="tech-level">3/5</span></div>
                         <div class="tech-bar-bg"><div class="tech-bar-fill bar-amber" style="width:60%"></div></div>
-                        <span class="tech-context">AI-assisted, SPA dashboard</span>
-                    </div>
-                    <div class="tech-item">
-                        <div class="tech-header"><span class="tech-name">PostgreSQL</span><span class="tech-level">3/5</span></div>
-                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-amber" style="width:60%"></div></div>
-                        <span class="tech-context">7 tables, migrations, asyncpg, backups</span>
-                    </div>
-                    <div class="tech-item">
-                        <div class="tech-header"><span class="tech-name">Docker / Linux / VPS</span><span class="tech-level">3/5</span></div>
-                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-amber" style="width:60%"></div></div>
-                        <span class="tech-context">Traefik, compose, deploy scripts, backups</span>
-                    </div>
-                    <div class="tech-item">
-                        <div class="tech-header"><span class="tech-name">Git</span><span class="tech-level">3/5</span></div>
-                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-amber" style="width:60%"></div></div>
-                        <span class="tech-context">GitHub Pages, deploy scripts, commit hooks</span>
+                        <span class="tech-context">migrations, backups, multi-tenant data</span>
                     </div>
                     <div class="tech-item">
                         <div class="tech-header"><span class="tech-name">Jira / Confluence</span><span class="tech-level">2.5/5</span></div>
@@ -1384,12 +1378,12 @@
                     <p class="en">
                         I wanted to let the process speak for itself. You're looking for someone who uses AI tools daily and translates requirements into working prototypes. Rather than claiming these skills on paper, I made the application itself demonstrate them.<br><br>
                         Every data point comes from real project logs and git history. The code was built with AI assistance. The product decisions, prioritization, and user understanding come from 8+ years of running my own business.<br><br>
-                        All code in my projects was created with Claude Code (AI pair-programming). I'm not a developer. I'm a Product Owner who understands logic, architecture, and can orchestrate AI to deliver results. The code needs review by an experienced developer. But the structure, product decisions, and prioritization: that's mine.
+                        I'm not a developer. I'm a Product Owner who understands logic, architecture, and can orchestrate AI to deliver results. The structure, product decisions, and prioritization: that's mine.
                     </p>
                     <p class="pl">
                         Chcialem pozwolic procesowi mowic za siebie. Szukacie kogos, kto uzywa narzedzi AI codziennie i tlumaczy wymagania na dzialajace prototypy. Zamiast deklarowac te umiejetnosci na papierze, sprawilem ze sama aplikacja je demonstruje.<br><br>
                         Kazdy punkt danych pochodzi z rzeczywistych logow projektowych i historii git. Kod powstal z pomoca AI. Decyzje produktowe, priorytetyzacja i rozumienie uzytkownikow wynikaja z 8+ lat prowadzenia wlasnej firmy.<br><br>
-                        Caly kod na tych projektach powstal z pomoca Claude Code (AI pair-programming). Nie jestem programista. Jestem Product Ownerem, ktory rozumie logike, architekture i potrafi orkiestrowac AI do dostarczania wynikow. Kod wymaga review doswiadczonego developera. Ale struktura, decyzje produktowe i priorytetyzacja: to moje.
+                        Nie jestem programista. Jestem Product Ownerem, ktory rozumie logike, architekture i potrafi orkiestrowac AI do dostarczania wynikow. Struktura, decyzje produktowe i priorytetyzacja: to moje.
                     </p>
                     <div class="attribution en">&mdash; Generated by Claude Code from Qdrant vector DB &middot; March 2, 2026</div>
                     <div class="attribution pl">&mdash; Wygenerowane przez Claude Code z bazy wektorowej Qdrant &middot; 2 marca 2026</div>
@@ -1434,7 +1428,7 @@
                     </div>
                     <div class="gallup-card">
                         <div class="gallup-rank">#5</div>
-                        <h3 class="gallup-name" style="color:var(--red)">Ideation</h3>
+                        <h3 class="gallup-name accent-amber">Ideation</h3>
                         <p class="gallup-desc en">Connecting dots across domains. TeleRecepcja was born from researching 25 industries, finding the non-obvious opportunity.</p>
                         <p class="gallup-desc pl">Laczenie kropek miedzy domenami. TeleRecepcja powstala z researchu 25 branz, znalezienie nieoczywistej szansy.</p>
                     </div>
@@ -1453,11 +1447,12 @@
                 <p class="pl">Dostepny na rozmowe o tym, jak AI zmienia role Product Ownera.</p>
 
                 <div class="contact-bar">
-                    <div class="contact-item"><strong>Email:</strong> piotr.sobczak@odok.pl</div>
-                    <div class="contact-item en"><strong>Phone:</strong> +48 530 212 221</div>
-                    <div class="contact-item pl"><strong>Telefon:</strong> +48 530 212 221</div>
-                    <div class="contact-item en"><strong>Location:</strong> Remote (Poland)</div>
-                    <div class="contact-item pl"><strong>Lokalizacja:</strong> Zdalnie (Polska)</div>
+                    <div class="contact-item"><strong>Email:</strong> <a href="mailto:piotr.sobczak@odok.pl">piotr.sobczak@odok.pl</a></div>
+                    <div class="contact-item en"><strong>Phone:</strong> <a href="tel:+48530212221">+48 530 212 221</a></div>
+                    <div class="contact-item pl"><strong>Telefon:</strong> <a href="tel:+48530212221">+48 530 212 221</a></div>
+                    <div class="contact-item en"><strong>Location:</strong> Bielsko-Biala, Poland (remote)</div>
+                    <div class="contact-item pl"><strong>Lokalizacja:</strong> Bielsko-Biala (zdalnie)</div>
+                    <div class="contact-item"><strong>GitHub:</strong> <a href="https://github.com/piotrsobczak-byte" target="_blank" rel="noopener">piotrsobczak-byte</a></div>
                 </div>
             </section>
 
@@ -1465,14 +1460,20 @@
 
         <footer>
             <div class="container">
-                <p class="en">Built with Claude Code + Qdrant</p>
-                <p class="pl">Zbudowane z Claude Code + Qdrant</p>
-                <p style="margin-top:4px" class="en">Source data: Qdrant vector DB &middot; git history &middot; real project logs &middot; 8 weeks of work</p>
-                <p style="margin-top:4px" class="pl">Dane zrodlowe: baza wektorowa Qdrant &middot; historia git &middot; rzeczywiste logi projektowe &middot; 8 tygodni pracy</p>
+                <p class="en">Piotr Sobczak &middot; Product Owner Application &middot; March 2026</p>
+                <p class="pl">Piotr Sobczak &middot; Aplikacja Product Owner &middot; Marzec 2026</p>
+                <p style="margin-top:4px">Built with Claude Code + Qdrant</p>
             </div>
         </footer>
 
     </div><!-- /.page-wrap -->
+
+    <script>
+    document.getElementById('lang-toggle').addEventListener('change', function() {
+        document.documentElement.lang = this.checked ? 'en' : 'pl';
+        this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    });
+    </script>
 
 </body>
 </html>
