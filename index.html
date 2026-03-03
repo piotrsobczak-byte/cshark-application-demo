@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piotr Sobczak — Product Owner Application | CSHARK</title>
-    <meta name="description" content="Product Owner application for CSHARK. AI-assisted, data-driven, built from real project logs and 7 years of B2B experience.">
+    <meta name="description" content="Product Owner application for CSHARK. AI-assisted, data-driven, built from real project logs and 8+ years of e-commerce business experience.">
     <style>
         /* ═══════════════════════════════════════════
            DESIGN SYSTEM
@@ -473,10 +473,36 @@
             border-radius: var(--radius);
             padding: 14px 16px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .tech-header {
+            display: flex;
             justify-content: space-between;
+            align-items: center;
         }
         .tech-name { font-size: 0.9rem; font-weight: 500; }
+        .tech-level {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+        .tech-bar-bg {
+            width: 100%;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .tech-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        .tech-bar-fill.bar-green { background: var(--green); }
+        .tech-bar-fill.bar-blue { background: var(--blue); }
+        .tech-bar-fill.bar-amber { background: var(--amber); }
+        .tech-bar-fill.bar-purple { background: var(--purple); }
         .tech-context {
             font-size: 0.75rem;
             color: var(--text-muted);
@@ -708,67 +734,10 @@
             <section id="process">
                 <span class="section-label en">How this was built</span>
                 <span class="section-label pl">Jak to powstalo</span>
-                <h2 class="en">The Process</h2>
-                <h2 class="pl">Proces</h2>
-                <p class="en">Three steps. Real code. Data sourced from real project logs.</p>
-                <p class="pl">Trzy kroki. Prawdziwy kod. Dane z rzeczywistych logow projektowych.</p>
-
-                <div class="process-steps">
-                    <div class="card">
-                        <div class="step-number">1</div>
-                        <h3 class="en">Query the Vector DB</h3>
-                        <h3 class="pl">Zapytanie do bazy wektorowej</h3>
-                        <p class="en" style="font-size:0.9rem;color:var(--text-secondary)">
-                            Qdrant stores my project history, decisions, and technical context. Every chunk has metadata: dates, quality scores, sources.
-                        </p>
-                        <p class="pl" style="font-size:0.9rem;color:var(--text-secondary)">
-                            Qdrant przechowuje historie projektow, decyzje i kontekst techniczny. Kazdy chunk ma metadane: daty, oceny jakosci, zrodla.
-                        </p>
-                        <div class="step-code"><span class="fn">qdrant-find</span>(<span class="str">"project metrics LOC endpoints"</span>)
-<span class="fn">qdrant-find</span>(<span class="str">"sesja telerecepcja deploy"</span>)
-<span class="fn">qdrant-find</span>(<span class="str">"AI extraction Gemini prompt"</span>)
-<span class="comment">// 2 Qdrant collections, 10,000+ chunks</span>
-<span class="comment">// 15 specialized AI workflows</span></div>
-                    </div>
-
-                    <div class="card">
-                        <div class="step-number">2</div>
-                        <h3 class="en">Map Requirements</h3>
-                        <h3 class="pl">Mapowanie wymagan</h3>
-                        <p class="en" style="font-size:0.9rem;color:var(--text-secondary)">
-                            Each CSHARK requirement was matched against retrieved evidence. Evidence strength reflects real overlap, not wishful thinking.
-                        </p>
-                        <p class="pl" style="font-size:0.9rem;color:var(--text-secondary)">
-                            Kazde wymaganie CSHARK zostalo zmatchowane z pobranymi dowodami. Sila dowodow odzwierciedla realne pokrycie, nie zyczeniowe myslenie.
-                        </p>
-                        <div class="step-code"><span class="kw">for</span> req <span class="kw">in</span> cshark_requirements:
-  evidence = <span class="fn">qdrant-find</span>(req.query)
-  strength = <span class="fn">evaluate</span>(
-    evidence.quality,
-    evidence.recency,
-    evidence.relevance
-  )
-<span class="comment">// 8 requirements mapped below</span></div>
-                    </div>
-
-                    <div class="card">
-                        <div class="step-number">3</div>
-                        <h3 class="en">Generate &amp; Ship</h3>
-                        <h3 class="pl">Generowanie i deploy</h3>
-                        <p class="en" style="font-size:0.9rem;color:var(--text-secondary)">
-                            Claude Code assembled this page from structured data. One HTML file. No framework, no build step. Deployed to GitHub Pages.
-                        </p>
-                        <p class="pl" style="font-size:0.9rem;color:var(--text-secondary)">
-                            Claude Code zbudowal ta strone ze strukturyzowanych danych. Jeden plik HTML. Bez frameworka, bez buildu. Deploy na GitHub Pages.
-                        </p>
-                        <div class="step-code"><span class="comment">// Claude Code session</span>
-<span class="fn">Read</span>(CLAUDE.md)     <span class="comment">// project IDs</span>
-<span class="fn">Read</span>(MEMORY.md)     <span class="comment">// lessons learned</span>
-<span class="fn">qdrant-find</span>(...)    <span class="comment">// deep context</span>
-<span class="fn">Write</span>(<span class="str">"index.html"</span>) <span class="comment">// this file</span>
-<span class="fn">git push</span> &rarr; <span class="str">live</span>   <span class="comment">// &lt;2 min</span></div>
-                    </div>
-                </div>
+                <h2 class="en">How This Page Was Made</h2>
+                <h2 class="pl">Jak powstala ta strona</h2>
+                <p class="en">All data on this page comes from a vector database (Qdrant) where I store project history, decisions, and technical context. Each CSHARK requirement was matched against real evidence &mdash; then Claude Code assembled this HTML and deployed it to GitHub Pages.</p>
+                <p class="pl">Wszystkie dane na tej stronie pochodza z bazy wektorowej (Qdrant), w ktorej przechowuje historie projektow, decyzje i kontekst techniczny. Kazde wymaganie CSHARK zostalo zmatchowane z realnymi dowodami &mdash; nastepnie Claude Code zbudowal ten HTML i zdployowal na GitHub Pages.</p>
             </section>
 
             <!-- ═══════════════════════════════════════════
@@ -804,10 +773,10 @@
                         <div class="req-requirement en">"Actively uses AI tools in daily work"</div>
                         <div class="req-requirement pl">"Aktywnie korzysta z narzedzi AI w codziennej pracy"</div>
                         <div class="req-evidence en">
-                            <strong>Claude Code</strong>: 1,500+ sessions, daily driver since January 2026. <strong>15 specialized AI workflows</strong> (deploy, testing, security audit, research, design, UX). <strong>Gemini</strong>: 5 model variants for OCR, transcription, extraction. <strong>Qdrant</strong> as persistent AI memory. <strong>Perplexity</strong> research pipeline. <strong>MCP protocol</strong> connecting all tools.
+                            I pick the right model for the job, not the most expensive one. <strong>Claude Code</strong> (Opus/Sonnet): pair-programming, architecture. <strong>Gemini 2.0 Flash</strong>: OCR (best vision). <strong>Gemini 2.5 Flash</strong>: transcription (better reasoning). <strong>Gemini 3 Flash</strong>: text extraction (newest, cheapest). <strong>Perplexity</strong>: research pipeline that auto-scrapes, chunks, and ingests into a vector database. <strong>Qdrant + MCP</strong>: persistent memory across all sessions.
                         </div>
                         <div class="req-evidence pl">
-                            <strong>Claude Code</strong>: 1500+ sesji, codzienne narzedzie od stycznia 2026. <strong>15 wyspecjalizowanych workflow AI</strong> (deploy, testing, audyt bezpieczenstwa, research, design, UX). <strong>Gemini</strong>: 5 wariantow modeli do OCR, transkrypcji, ekstrakcji. <strong>Qdrant</strong> jako trwala pamiec AI. <strong>Perplexity</strong> pipeline research. <strong>Protokol MCP</strong> laczacy wszystkie narzedzia.
+                            Dobieram model do zadania, nie najdrozszy do wszystkiego. <strong>Claude Code</strong> (Opus/Sonnet): pair-programming, architektura. <strong>Gemini 2.0 Flash</strong>: OCR (najlepszy vision). <strong>Gemini 2.5 Flash</strong>: transkrypcja (lepszy reasoning). <strong>Gemini 3 Flash</strong>: ekstrakcja tekstu (najnowszy, najtanszy). <strong>Perplexity</strong>: pipeline research ktory automatycznie scrapuje, chunkuje i wrzuca do bazy wektorowej. <strong>Qdrant + MCP</strong>: trwala pamiec miedzy sesjami.
                         </div>
                         <div class="req-source">source: qdrant-find("AI tools daily usage") &middot; quality: gold</div>
                         <span class="evidence-tag evidence-strong">Strong evidence</span>
@@ -834,12 +803,12 @@
                         <div class="req-requirement en">"Translate requirements into working PoC via vibe-coding"</div>
                         <div class="req-requirement pl">"Tlumaczenie wymagan na dzialajacy PoC przez vibe-coding"</div>
                         <div class="req-evidence en">
-                            My workflow: <strong>TASK-CARDS.md</strong> (requirements) &rarr; Claude Code subagent &rarr; working code. TeleRecepcja's full production codebase was built this way. CLAUDE.md serves as persistent context (IDs, credentials, architecture decisions) across all sessions.
+                            I'm not a developer and I don't pretend to be one. But I'm also <strong>not a mindless vibecoder</strong> who burns tokens hoping for the best. AI is a tool that <strong>removes the technical barrier</strong> &mdash; I provide the logic, the flow, and the structure. I check every AI output, understand the architecture, and iterate until it works correctly. Structure first, then implementation.
                         </div>
                         <div class="req-evidence pl">
-                            Moj workflow: <strong>TASK-CARDS.md</strong> (wymagania) &rarr; subagent Claude Code &rarr; dzialajacy kod. Caly produkcyjny kod TeleRecepcji powstal w ten sposob. CLAUDE.md sluzy jako trwaly kontekst (IDs, credentials, decyzje architektoniczne) przez wszystkie sesje.
+                            Nie jestem programista i nie udaje, ze nim jestem. Ale nie jestem tez <strong>bezmyslnym vibecoderem</strong>, ktory pali tokeny liczac na szczescie. AI to narzedzie, ktore <strong>usuwa bariere techniczna</strong> &mdash; ja dostarczam logike, flow i strukture. Sprawdzam kazdy wynik AI, rozumiem architekture i iteruje az dziala poprawnie. Najpierw struktura, potem implementacja.
                         </div>
-                        <div class="req-source">source: qdrant-find("vibe coding workflow TASK-CARDS")</div>
+                        <div class="req-source">source: 70+ Claude Code sessions, 5 production projects</div>
                         <span class="evidence-tag evidence-strong">Strong evidence</span>
                     </div>
 
@@ -864,10 +833,10 @@
                         <div class="req-requirement en">"Independence, proactivity, ownership"</div>
                         <div class="req-requirement pl">"Samodzielnosc, proaktywnosc, ownership"</div>
                         <div class="req-evidence en">
-                            Self-taught the entire stack in 8 weeks: Python/FastAPI, React 19, PostgreSQL, Docker, Twilio, Gemini API, Qdrant, n8n. <strong>Gallup #1: Learner</strong>. No team, no manager, no external deadlines &mdash; all driven by internal motivation to ship.
+                            I can work with the entire stack: Python/FastAPI, React 19, PostgreSQL, Docker, Twilio, Gemini API, Qdrant, n8n. I find problems myself, research solutions with AI, and resolve them independently. <strong>Gallup #1: Learner</strong>. No team, no manager, no external deadlines &mdash; all driven by internal motivation to ship.
                         </div>
                         <div class="req-evidence pl">
-                            Samodzielnie nauczylem sie calego stacka w 8 tygodni: Python/FastAPI, React 19, PostgreSQL, Docker, Twilio, Gemini API, Qdrant, n8n. <strong>Gallup #1: Learner</strong>. Bez zespolu, bez managera, bez zewnetrznych deadlinow &mdash; wszystko napedzane wewnetrzna motywacja do shippingu.
+                            Potrafie pracowac z calym stackiem: Python/FastAPI, React 19, PostgreSQL, Docker, Twilio, Gemini API, Qdrant, n8n. Sam znajduje problemy, szukam rozwiazan z pomoca AI i rozwiazuje je samodzielnie. <strong>Gallup #1: Learner</strong>. Bez zespolu, bez managera, bez zewnetrznych deadlinow &mdash; wszystko napedzane wewnetrzna motywacja do shippingu.
                         </div>
                         <div class="req-source">source: MEMORY.md &middot; Gallup assessment</div>
                         <span class="evidence-tag evidence-strong">Strong evidence</span>
@@ -906,51 +875,51 @@
             </section>
 
             <!-- ═══════════════════════════════════════════
-                 B2B SALES BACKGROUND
+                 BUSINESS BACKGROUND
                  ═══════════════════════════════════════════ -->
             <section id="sales">
                 <span class="section-label en">Background</span>
                 <span class="section-label pl">Doswiadczenie</span>
-                <h2 class="en">7 Years in B2B Sales</h2>
-                <h2 class="pl">7 lat w sprzedazy B2B</h2>
-                <p class="en">The foundation that makes the Product Owner role a natural transition.</p>
-                <p class="pl">Fundament, ktory sprawia ze rola Product Ownera to naturalne przejscie.</p>
+                <h2 class="en">8+ Years Running a Business</h2>
+                <h2 class="pl">8+ lat prowadzenia firmy</h2>
+                <p class="en">E-commerce, logistics, team management &mdash; a foundation that maps naturally to the Product Owner role.</p>
+                <p class="pl">E-commerce, logistyka, zarzadzanie zespolem &mdash; fundament, ktory naturalnie mapuje sie na role Product Ownera.</p>
 
                 <div class="req-grid" style="margin-top:24px">
                     <div class="req-card">
-                        <span class="req-tag tag-green">Client Discovery</span>
+                        <span class="req-tag tag-green">E-commerce</span>
                         <div class="req-evidence en">
-                            Client discovery, needs analysis, closing deals. Managing relationships with <strong>50+ accounts</strong>. Negotiation, objection handling, follow-up systems. The same skills that close a deal are the skills that define a user story.
+                            <strong>8+ years</strong> running my own e-commerce business. Importing apparel from Canada, selling on <strong>Allegro</strong> and <strong>Shopper</strong>. Managing <strong>15+ employees</strong>, warehouse operations, supply chain logistics. From sourcing to last-mile delivery &mdash; end-to-end ownership.
                         </div>
                         <div class="req-evidence pl">
-                            Discovery klientow, analiza potrzeb, zamykanie dealow. Zarzadzanie relacjami z <strong>50+ kontami</strong>. Negocjacje, obsluga obiekcji, systemy follow-up. Te same umiejetnosci, ktore zamykaja deal, definiuja user story.
+                            <strong>8+ lat</strong> prowadzenia wlasnego biznesu e-commerce. Import odziezy z Kanady, sprzedaz na <strong>Allegro</strong> i <strong>Shopper</strong>. Zarzadzanie <strong>15+ pracownikami</strong>, operacje magazynowe, logistyka lancucha dostaw. Od sourcingu do last-mile delivery &mdash; pelna odpowiedzialnosc end-to-end.
                         </div>
                     </div>
                     <div class="req-card">
-                        <span class="req-tag tag-blue">Natural Transition</span>
+                        <span class="req-tag tag-blue">Processes</span>
                         <div class="req-evidence en">
-                            Understanding client needs &rarr; translating into product requirements. 7 years of listening to what people actually need (not what they say they want) is the core of product ownership.
+                            Built <strong>production systems</strong> on a warehouse floor. Standardization, <strong>5S methodology</strong>, process optimization. When you manage a warehouse with 15 people, you learn to create systems that work without you hovering over every step.
                         </div>
                         <div class="req-evidence pl">
-                            Rozumienie potrzeb klienta &rarr; tlumaczenie na wymagania produktowe. 7 lat sluchania tego, czego ludzie naprawde potrzebuja (nie tego, co mowia ze chca) to sedno product ownershipu.
+                            Budowalem <strong>systemy produkcyjne</strong> na hali magazynowej. Standaryzacja, <strong>metodologia 5S</strong>, optymalizacja procesow. Gdy zarzadzasz magazynem z 15 osobami, uczysz sie tworzyc systemy, ktore dzialaja bez ciaglego nadzoru.
                         </div>
                     </div>
                     <div class="req-card">
-                        <span class="req-tag tag-amber">Stage Performance</span>
+                        <span class="req-tag tag-amber">Career Transition</span>
                         <div class="req-evidence en">
-                            <strong>4 years as a professional magician</strong> &mdash; performance under pressure, audience reading, structured storytelling (pledge, turn, prestige). Every demo, every stakeholder meeting is a performance.
+                            A <strong>conscious decision</strong> to transition into tech. Available <strong>full-time</strong>. I see the future in AI and I'm deliberately building the skills to be part of it. Not running away from something &mdash; running toward something.
                         </div>
                         <div class="req-evidence pl">
-                            <strong>4 lata jako profesjonalny iluzjonista</strong> &mdash; wystapienia pod presja, czytanie publicznosci, ustrukturyzowany storytelling (pledge, turn, prestige). Kazde demo, kazde spotkanie z interesariuszami to wystep.
+                            <strong>Swiadoma decyzja</strong> o przebranowieniu. Dostepny <strong>full-time</strong>. Widze przyszlosc w AI i celowo buduje kompetencje, zeby byc jej czescia. Nie uciekam od czegos &mdash; biegne ku czemus.
                         </div>
                     </div>
                     <div class="req-card">
-                        <span class="req-tag tag-purple">AI Leap</span>
+                        <span class="req-tag tag-purple">Natural Fit</span>
                         <div class="req-evidence en">
-                            From sales to AI-orchestrated product building in 8 weeks. Not a career change &mdash; an evolution. The same person who managed 50+ client accounts now manages 5 parallel AI-assisted projects.
+                            Processes + business logic + optimization &rarr; <strong>Product Owner</strong>. The same mindset that built warehouse systems now builds software products. Understanding user needs, defining requirements, prioritizing &mdash; I've been doing this for years, just in a different domain.
                         </div>
                         <div class="req-evidence pl">
-                            Od sprzedazy do budowania produktow orkiestrowanych AI w 8 tygodni. Nie zmiana kariery &mdash; ewolucja. Ta sama osoba, ktora zarzadzala 50+ kontami klientow, teraz zarzadza 5 rownoleglymi projektami wspomaganymi AI.
+                            Procesy + logika biznesowa + optymalizacja &rarr; <strong>Product Owner</strong>. Ten sam sposob myslenia, ktory budowal systemy magazynowe, teraz buduje produkty software'owe. Rozumienie potrzeb uzytkownikow, definiowanie wymagan, priorytetyzacja &mdash; robilem to latami, tylko w innej domenie.
                         </div>
                     </div>
                 </div>
@@ -974,10 +943,10 @@
                         <h3>TeleRecepcja</h3>
                         <span class="req-tag tag-green" style="margin-bottom:8px">Production SaaS</span>
                         <p class="project-desc en">
-                            AI receptionist for auto workshops. Phone recording &rarr; Gemini transcription &rarr; structured extraction &rarr; SMS with magic link to React dashboard. Full-stack: Python FastAPI backend + React 19 SPA (TypeScript, Vite). Multi-tenant, RODO-compliant, Docker behind Traefik.
+                            <strong>Voice-first CRM</strong> for auto workshops. Not just transcription &mdash; a complete job management system. A mechanic with dirty hands doesn't need to type anything: accept a job, edit details, add notes, send SMS &mdash; all by voice. Phone recording &rarr; Gemini transcription &rarr; AI extraction &rarr; SMS with magic link to React dashboard. Full-stack: Python FastAPI + React 19 SPA. Multi-tenant, RODO-compliant, 19-item backlog for scale.
                         </p>
                         <p class="project-desc pl">
-                            AI recepcjonistka dla warsztatow samochodowych. Nagranie rozmowy &rarr; transkrypcja Gemini &rarr; ekstrakcja danych &rarr; SMS z magic linkiem do dashboardu React. Full-stack: backend Python FastAPI + React 19 SPA (TypeScript, Vite). Multi-tenant, zgodny z RODO, Docker za Traefik.
+                            <strong>Voice-first CRM</strong> dla warsztatow samochodowych. Nie tylko transkrypcja &mdash; pelny obieg zlecen. Mechanik z brudnymi rekami nie musi niczego pisac: przyjecie zlecenia, edycja, notatki, SMS &mdash; wszystko glosem. Nagranie rozmowy &rarr; transkrypcja Gemini &rarr; ekstrakcja AI &rarr; SMS z magic linkiem do dashboardu React. Full-stack: Python FastAPI + React 19 SPA. Multi-tenant, zgodny z RODO, backlog 19 pozycji na skalowanie.
                         </p>
                         <div class="project-metrics">
                             <div class="metric">
@@ -1020,10 +989,10 @@
                         <h3>Car Flip Hunter</h3>
                         <span class="req-tag tag-blue" style="margin-bottom:8px">Autonomous Bot</span>
                         <p class="project-desc en">
-                            Automated car deal finder. Scrapes OTOMOTO every 30 min, scores via custom matrix (engine, km, year, body type), AI extracts 35 structured fields from descriptions using Gemini, alerts via Telegram. Dual-path analysis with regex fallback.
+                            4-stage pipeline: <strong>scrape &rarr; filter/margin &rarr; deep analysis &rarr; Telegram alert</strong>. Scrapes OTOMOTO every 30 min, scores via custom pricing matrix (416 entries: engine, km, year, body type). <strong>Price tracking</strong>: detects price drops, flags "motivated sellers" (2+ drops/week). AI extracts 35 fields from listings (Gemini 3 Flash), with regex fallback. Scam detection, dealer marking, freshness scoring. 13+ car models, 7 brands tracked.
                         </p>
                         <p class="project-desc pl">
-                            Automatyczny wyszukiwacz okazji samochodowych. Scrapuje OTOMOTO co 30 min, ocenia wedlug wlasnej matrycy (silnik, km, rocznik, typ nadwozia), AI wyciaga 35 pol z opisow za pomoca Gemini, alerty przez Telegram. Dual-path analiza z regex fallbackiem.
+                            4-etapowy pipeline: <strong>scrape &rarr; filtrowanie/marza &rarr; gleboka analiza &rarr; alert Telegram</strong>. Scrapuje OTOMOTO co 30 min, wycena na podstawie matrycy cenowej (416 wpisow: silnik, km, rocznik, nadwozie). <strong>Sledzenie cen</strong>: wykrywa obnizki, flaguje "zmotywowanych sprzedawcow" (2+ spadki/tydzien). AI wyciaga 35 pol z ogloszen (Gemini 3 Flash), z regex fallbackiem. Wykrywanie scamow, oznaczanie dealerow, scoring swiezosci. 13+ modeli, 7 marek sledzonych.
                         </p>
                         <div class="project-metrics">
                             <div class="metric">
@@ -1062,10 +1031,10 @@
                         <h3>Biuro Integration</h3>
                         <span class="req-tag tag-amber" style="margin-bottom:8px">Workflow Automation</span>
                         <p class="project-desc en">
-                            Accounting office automation. Optima &rarr; wFirma migration (109 invoices, 116k PLN). Multi-tenant n8n workflows with 3-header auth routing. OCR pipeline with Gemini. Knowledge base: 1,000+ chunks in Qdrant, accessible via MCP protocol.
+                            My first project &mdash; started with n8n. <strong>Custom OCR pipeline</strong>: Gmail &rarr; Gemini 3.0 OCR &rarr; duplicate check &rarr; Google Drive (sorted per client/year/month) &rarr; Airtable. <strong>Optima &rarr; wFirma migration</strong>: 5-phase plan (JPK export, contractor import, invoice OCR, multi-tenant, go-live). Modular architecture: master pipeline &rarr; 3 subworkflows. Knowledge base: 1,000+ chunks in Qdrant via MCP.
                         </p>
                         <p class="project-desc pl">
-                            Automatyzacja biura ksiegowego. Migracja Optima &rarr; wFirma (109 faktur, 116k PLN). Multi-tenant workflow n8n z 3-naglowkowym routingiem auth. Pipeline OCR z Gemini. Baza wiedzy: 1000+ chunkow w Qdrant, dostepna przez protokol MCP.
+                            Moj pierwszy projekt &mdash; zaczal sie od n8n. <strong>Wlasny pipeline OCR</strong>: Gmail &rarr; Gemini 3.0 OCR &rarr; sprawdzenie duplikatow &rarr; Google Drive (sortowanie per klient/rok/miesiac) &rarr; Airtable. <strong>Migracja Optima &rarr; wFirma</strong>: 5-fazowy plan (eksport JPK, import kontrahentow, OCR faktur, multi-tenant, go-live). Modularna architektura: master pipeline &rarr; 3 subworkflows. Baza wiedzy: 1000+ chunkow w Qdrant przez MCP.
                         </p>
                         <div class="project-metrics">
                             <div class="metric">
@@ -1084,9 +1053,9 @@
                                 <div class="metric-label pl">Chunkow wiedzy</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-value accent-amber">109</div>
-                                <div class="metric-label en">Invoices migrated</div>
-                                <div class="metric-label pl">Faktur zmigrowanych</div>
+                                <div class="metric-value accent-amber" style="font-size:0.85rem">OCR</div>
+                                <div class="metric-label en">Custom pipeline</div>
+                                <div class="metric-label pl">Wlasny pipeline</div>
                             </div>
                         </div>
                         <div class="project-stack">
@@ -1104,10 +1073,10 @@
                         <h3>TrenerPartner.pl</h3>
                         <span class="req-tag tag-purple" style="margin-bottom:8px">Auto-pilot (frozen)</span>
                         <p class="project-desc en">
-                            B2B lead generation platform for personal trainers. Landing page, 120 qualified leads collected, 20 social media posts generated and scheduled via Postiz. Consciously frozen after market analysis revealed 24x lower revenue/client vs TeleRecepcja &mdash; a data-driven pivot decision.
+                            My first landing page, <strong>built in 1 day</strong> purely for data collection. B2B lead generation for personal trainers. 120 qualified leads collected, 20 social media posts generated and scheduled via Postiz. Consciously frozen after market analysis (25 industries) revealed 24x lower revenue/client vs TeleRecepcja &mdash; a data-driven pivot decision.
                         </p>
                         <p class="project-desc pl">
-                            Platforma generowania leadow B2B dla trenerow personalnych. Landing page, 120 zakwalifikowanych leadow, 20 postow social media wygenerowanych i zaplanowanych przez Postiz. Swiadomie zamrozony po analizie rynku: 24x mniejszy przychod/klient niz TeleRecepcja &mdash; decyzja o pivocie oparta na danych.
+                            Moj pierwszy landing page, <strong>zbudowany w 1 dzien</strong> wylacznie do zbierania danych. Generowanie leadow B2B dla trenerow personalnych. 120 zakwalifikowanych leadow, 20 postow social media wygenerowanych i zaplanowanych przez Postiz. Swiadomie zamrozony po analizie rynku (25 branz): 24x mniejszy przychod/klient niz TeleRecepcja &mdash; decyzja o pivocie oparta na danych.
                         </p>
                         <div class="project-metrics">
                             <div class="metric">
@@ -1176,45 +1145,22 @@
                     </div>
 
                     <p class="en" style="font-size:0.9rem;margin-bottom:16px">
-                        100% of my code, commits, documentation, and CLAUDE.md is written in English. All Gemini prompts, API integrations, and technical communication happens in English. Reading comprehension is native-level — I consume English content exclusively for all technical work.
+                        100% of my code, commits, and documentation is written in English. All Gemini prompts, API integrations, and technical communication happens in English. Reading comprehension is native-level &mdash; I consume English content exclusively for all technical work.
                     </p>
                     <p class="pl" style="font-size:0.9rem;margin-bottom:16px">
-                        100% mojego kodu, commitow, dokumentacji i CLAUDE.md jest pisane po angielsku. Wszystkie prompty Gemini, integracje API i komunikacja techniczna odbywa sie po angielsku. Zrozumienie tekstu jest na poziomie natywnym — cala wiedze techniczna konsumuje wylacznie po angielsku.
+                        100% mojego kodu, commitow i dokumentacji jest pisane po angielsku. Wszystkie prompty Gemini, integracje API i komunikacja techniczna odbywa sie po angielsku. Zrozumienie tekstu jest na poziomie natywnym &mdash; cala wiedze techniczna konsumuje wylacznie po angielsku.
                     </p>
 
-                    <h3 class="en" style="margin-top:24px">For calls: AI-augmented communication</h3>
-                    <h3 class="pl" style="margin-top:24px">Na callach: komunikacja wspomagana AI</h3>
-
-                    <div class="lang-flow">
-                        <span class="lang-flow-step en">Video call (English)</span>
-                        <span class="lang-flow-step pl">Video call (angielski)</span>
-                        <span class="lang-flow-arrow">&rarr;</span>
-                        <span class="lang-flow-step en">Live transcription</span>
-                        <span class="lang-flow-step pl">Transkrypcja live</span>
-                        <span class="lang-flow-arrow">&rarr;</span>
-                        <span class="lang-flow-step en">AI extracts action items</span>
-                        <span class="lang-flow-step pl">AI wyciaga akcje do zrobienia</span>
-                        <span class="lang-flow-arrow">&rarr;</span>
-                        <span class="lang-flow-step en">Structured follow-up</span>
-                        <span class="lang-flow-step pl">Strukturalny follow-up</span>
-                    </div>
-
-                    <p class="en" style="font-size:0.9rem;margin-bottom:16px">
-                        This isn't hypothetical — it's the same pipeline I built for TeleRecepcja. Phone recording &rarr; Gemini transcription &rarr; AI extraction of key data. I use this technology in production daily. Applying it to my own calls is trivial.
-                    </p>
-                    <p class="pl" style="font-size:0.9rem;margin-bottom:16px">
-                        To nie jest hipoteza — to ten sam pipeline, ktory zbudowalem dla TeleRecepcji. Nagranie rozmowy &rarr; transkrypcja Gemini &rarr; AI extraction kluczowych danych. Uzywam tej technologii na produkcji codziennie. Zastosowanie jej do wlasnych callidziala analogicznie.
-                    </p>
                 </div>
 
                 <div class="lang-card" style="margin-top:16px; border-color: rgba(34, 197, 94, 0.3);">
-                    <h3 class="en accent-green">The proof is this page</h3>
-                    <h3 class="pl accent-green">Dowodem jest ta strona</h3>
+                    <h3 class="en accent-green">Written English — already working</h3>
+                    <h3 class="pl accent-green">Angielski pisany — juz dziala</h3>
                     <p class="en" style="font-size:0.9rem">
-                        You're reading this in English — toggle to Polish with the switch in the top-right corner. Both versions were generated from the same data, in the same session, by the same AI agent I use daily. Written communication in English is already solved. Verbal communication is augmented by the exact product I'm building.
+                        You're reading this in English &mdash; toggle to Polish with the switch in the top-right corner. Both versions were generated from the same data, by the same AI tools I use daily. Written technical communication in English is a solved problem for me. For verbal communication, I'm actively improving &mdash; the motivation is there.
                     </p>
                     <p class="pl" style="font-size:0.9rem">
-                        Czytasz to po angielsku — przelacz na polski przyciskiem w prawym gornym rogu. Obie wersje powstaly z tych samych danych, w tej samej sesji, przez tego samego agenta AI, ktorego uzywam codziennie. Pisemna komunikacja po angielsku jest juz rozwiazana. Werbalna komunikacja jest wspomagana dokladnie przez produkt, ktory buduje.
+                        Czytasz to po angielsku &mdash; przelacz na polski przyciskiem w prawym gornym rogu. Obie wersje powstaly z tych samych danych, tymi samymi narzedziami AI, ktorych uzywam codziennie. Pisemna komunikacja techniczna po angielsku to dla mnie rozwiazany problem. Komunikacje werbalna aktywnie poprawiam &mdash; motywacja jest.
                     </p>
                 </div>
             </section>
@@ -1234,28 +1180,37 @@
                     <div class="tl-item">
                         <div class="tl-dot tl-dot-green"></div>
                         <div class="tl-date">Jan 12, 2026</div>
-                        <div class="tl-title en">Infrastructure bootstrap</div>
-                        <div class="tl-title pl">Bootstrap infrastruktury</div>
-                        <div class="tl-desc en">VPS provisioned, n8n deployed, MCP protocol configured, Qdrant vector database initialized.</div>
-                        <div class="tl-desc pl">VPS postawiony, n8n wdrozony, protokol MCP skonfigurowany, baza wektorowa Qdrant zainicjalizowana.</div>
+                        <div class="tl-title en">Infrastructure + first n8n workflows</div>
+                        <div class="tl-title pl">Infrastruktura + pierwsze workflow n8n</div>
+                        <div class="tl-desc en">VPS provisioned, n8n deployed, Qdrant initialized. Started Biuro Integration &mdash; my first project, built entirely in n8n.</div>
+                        <div class="tl-desc pl">VPS postawiony, n8n wdrozony, Qdrant zainicjalizowany. Start Biuro Integration &mdash; moj pierwszy projekt, zbudowany calkowicie w n8n.</div>
                     </div>
 
                     <div class="tl-item">
-                        <div class="tl-dot tl-dot-green"></div>
+                        <div class="tl-dot tl-dot-amber"></div>
                         <div class="tl-date">Jan 22, 2026</div>
-                        <div class="tl-title en">wFirma API fully mapped</div>
-                        <div class="tl-title pl">wFirma API w pelni zmapowane</div>
-                        <div class="tl-desc en">147 API endpoints documented. Multi-tenant routing with 3 separate auth header sets. XML request format reverse-engineered.</div>
-                        <div class="tl-desc pl">147 endpointow API udokumentowanych. Multi-tenant routing z 3 oddzielnymi zestawami naglowkow auth. Format XML zrewersowany.</div>
+                        <div class="tl-title en">OCR pipeline + invoice automation</div>
+                        <div class="tl-title pl">Pipeline OCR + automatyzacja faktur</div>
+                        <div class="tl-desc en">Custom OCR pipeline: Gmail &rarr; Gemini OCR &rarr; duplicate check &rarr; Google Drive (auto-sorted per client/year/month) &rarr; Airtable. Modular: master pipeline + 3 subworkflows.</div>
+                        <div class="tl-desc pl">Wlasny pipeline OCR: Gmail &rarr; Gemini OCR &rarr; sprawdzenie duplikatow &rarr; Google Drive (auto-sortowanie per klient/rok/miesiac) &rarr; Airtable. Modularna budowa: master pipeline + 3 subworkflows.</div>
+                    </div>
+
+                    <div class="tl-item">
+                        <div class="tl-dot tl-dot-amber"></div>
+                        <div class="tl-date">Jan 30, 2026</div>
+                        <div class="tl-title en">Optima &rarr; wFirma migration</div>
+                        <div class="tl-title pl">Migracja Optima &rarr; wFirma</div>
+                        <div class="tl-desc en">5-phase migration plan: JPK export, contractor import, invoice OCR, multi-tenant setup, go-live. First pilot client completed successfully.</div>
+                        <div class="tl-desc pl">5-fazowy plan migracji: eksport JPK, import kontrahentow, OCR faktur, konfiguracja multi-tenant, go-live. Pierwszy klient pilotazowy zmigrowany pomyslnie.</div>
                     </div>
 
                     <div class="tl-item">
                         <div class="tl-dot tl-dot-blue"></div>
-                        <div class="tl-date">Feb 01, 2026</div>
-                        <div class="tl-title en">Multi-MCP architecture deployed</div>
-                        <div class="tl-title pl">Architektura Multi-MCP wdrozona</div>
-                        <div class="tl-desc en">4 always-on MCP servers + on-demand groups (n8n, data, infra). Toggle system with PowerShell scripts.</div>
-                        <div class="tl-desc pl">4 serwery MCP always-on + grupy on-demand (n8n, data, infra). System przelaczania skryptami PowerShell.</div>
+                        <div class="tl-date">Feb 08, 2026</div>
+                        <div class="tl-title en">Decision: n8n &rarr; FastAPI + React</div>
+                        <div class="tl-title pl">Decyzja: n8n &rarr; FastAPI + React</div>
+                        <div class="tl-desc en">TeleRecepcja outgrew visual workflows. Conscious architectural decision to migrate to a proper codebase &mdash; FastAPI backend + React 19 SPA. n8n stayed for Biuro (where it fits).</div>
+                        <div class="tl-desc pl">TeleRecepcja przerosla wizualne workflow. Swiadoma decyzja architektoniczna o migracji do porzadnego kodu &mdash; backend FastAPI + React 19 SPA. n8n zostal dla Biuro (tam pasuje).</div>
                     </div>
 
                     <div class="tl-item">
@@ -1263,17 +1218,8 @@
                         <div class="tl-date">Feb 13, 2026</div>
                         <div class="tl-title en">TeleRecepcja v1.0 shipped</div>
                         <div class="tl-title pl">TeleRecepcja v1.0 wyslana</div>
-                        <div class="tl-desc en">FastAPI + PostgreSQL + Twilio. Conscious decision to drop n8n &mdash; complexity demanded a proper codebase, not visual workflows.</div>
-                        <div class="tl-desc pl">FastAPI + PostgreSQL + Twilio. Swiadoma decyzja o rezygnacji z n8n &mdash; zlozonosc wymagala porzadnego kodu, nie wizualnych workflow.</div>
-                    </div>
-
-                    <div class="tl-item">
-                        <div class="tl-dot tl-dot-purple"></div>
-                        <div class="tl-date">Feb 17, 2026</div>
-                        <div class="tl-title en">React 19 SPA &mdash; full dashboard</div>
-                        <div class="tl-title pl">React 19 SPA &mdash; pelny dashboard</div>
-                        <div class="tl-desc en">Workshop dashboard, client management with phone-as-key, job tracking with status flow, SMS notification interface. Vite build, TypeScript, served from FastAPI static.</div>
-                        <div class="tl-desc pl">Dashboard warsztatu, zarzadzanie klientami (telefon jako klucz), sledzenie zlecen ze statusami, interfejs powiadomien SMS. Build Vite, TypeScript, serwowany z FastAPI static.</div>
+                        <div class="tl-desc en">FastAPI + PostgreSQL + Twilio + Gemini. Full voice-to-dashboard pipeline working in production.</div>
+                        <div class="tl-desc pl">FastAPI + PostgreSQL + Twilio + Gemini. Pelny pipeline glos-do-dashboardu dzialajacy na produkcji.</div>
                     </div>
 
                     <div class="tl-item">
@@ -1281,26 +1227,26 @@
                         <div class="tl-date">Feb 23, 2026</div>
                         <div class="tl-title en">TeleRecepcja v10.45 &mdash; Pilot Ready</div>
                         <div class="tl-title pl">TeleRecepcja v10.45 &mdash; Gotowa na pilota</div>
-                        <div class="tl-desc en">RODO compliance complete, 30/33 QA bugs fixed, 68 deployments, zero critical production incidents. Ready for first paying customer.</div>
-                        <div class="tl-desc pl">Zgodnosc RODO kompletna, 30/33 bugow QA naprawionych, 68 deployow, zero krytycznych incydentow. Gotowa na pierwszego placaacego klienta.</div>
+                        <div class="tl-desc en">10 major versions, 68 deployments, zero critical production incidents. RODO compliance complete. Voice-first CRM ready for first paying customer.</div>
+                        <div class="tl-desc pl">10 wersji glownych, 68 deployow, zero krytycznych incydentow. Zgodnosc z RODO kompletna. Voice-first CRM gotowy na pierwszego placaacego klienta.</div>
                     </div>
 
                     <div class="tl-item">
-                        <div class="tl-dot tl-dot-amber"></div>
+                        <div class="tl-dot tl-dot-purple"></div>
                         <div class="tl-date">Mar 01, 2026</div>
-                        <div class="tl-title en">AI extraction &mdash; Gemini 3 Flash</div>
-                        <div class="tl-title pl">AI extraction &mdash; Gemini 3 Flash</div>
-                        <div class="tl-desc en">35-field structured extraction from car listings. Dual-path analysis: AI scoring + regex fallback. Cost: $0.00035/call.</div>
-                        <div class="tl-desc pl">Ekstrakcja 35 pol z ogloszen samochodowych. Dual-path analiza: scoring AI + regex fallback. Koszt: $0.00035/call.</div>
+                        <div class="tl-title en">Car Flip Hunter goes live</div>
+                        <div class="tl-title pl">Car Flip Hunter rusza na produkcji</div>
+                        <div class="tl-desc en">Autonomous bot running every 30 min. 4-stage pipeline with price tracking, AI extraction (35 fields), scam detection. 13+ car models tracked 24/7.</div>
+                        <div class="tl-desc pl">Autonomiczny bot dzialajacy co 30 min. 4-etapowy pipeline ze sledzeniem cen, ekstrakcja AI (35 pol), wykrywanie scamow. 13+ modeli sledzonych 24/7.</div>
                     </div>
 
                     <div class="tl-item tl-item-current">
                         <div class="tl-dot tl-dot-green"></div>
-                        <div class="tl-date">Mar 02, 2026</div>
-                        <div class="tl-title accent-green en">This application &mdash; generated from vector DB</div>
-                        <div class="tl-title accent-green pl">Ta aplikacja &mdash; wygenerowana z bazy wektorowej</div>
-                        <div class="tl-desc en">Qdrant queries &rarr; Claude Code &rarr; self-contained HTML with EN/PL toggle.</div>
-                        <div class="tl-desc pl">Zapytania Qdrant &rarr; Claude Code &rarr; self-contained HTML z przelacznikiem EN/PL.</div>
+                        <div class="tl-date">Mar 03, 2026</div>
+                        <div class="tl-title accent-green en">This application</div>
+                        <div class="tl-title accent-green pl">Ta aplikacja</div>
+                        <div class="tl-desc en">Qdrant queries &rarr; Claude Code &rarr; self-contained HTML with EN/PL toggle. All data from real project logs.</div>
+                        <div class="tl-desc pl">Zapytania Qdrant &rarr; Claude Code &rarr; self-contained HTML z przelacznikiem EN/PL. Wszystkie dane z rzeczywistych logow projektowych.</div>
                     </div>
                 </div>
             </section>
@@ -1315,53 +1261,68 @@
                 <p class="en">All learned and applied in production within the last 8 weeks.</p>
                 <p class="pl">Wszystko nauczone i zastosowane na produkcji w ciagu ostatnich 8 tygodni.</p>
 
+                <p class="en" style="font-size:0.8rem;color:var(--text-muted);margin-top:-8px">All AI-assisted. Honest self-assessment &mdash; not inflated.</p>
+                <p class="pl" style="font-size:0.8rem;color:var(--text-muted);margin-top:-8px">Wszystko z pomoca AI. Uczciwa samoocena &mdash; bez nadmuchiwania.</p>
+
                 <div class="tech-grid">
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">Python / FastAPI</span>
-                        <span class="tech-context">production use (AI-assisted, 14k LOC TeleRecepcja)</span>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">Claude Code / AI Workflows</span><span class="tech-level">5/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-green" style="width:100%"></div></div>
+                        <span class="tech-context">daily driver, 15 specialized configurations</span>
                     </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">React 19 / TypeScript</span>
-                        <span class="tech-context">production use (AI-assisted, SPA dashboard)</span>
-                    </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">PostgreSQL</span>
-                        <span class="tech-context">7 tables, migrations, asyncpg, automated backups</span>
-                    </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">Claude Code / AI Workflows</span>
-                        <span class="tech-context">daily driver, 15 specialized YAML configurations</span>
-                    </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">Gemini API (5 models)</span>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">Gemini API</span><span class="tech-level">4/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-green" style="width:80%"></div></div>
                         <span class="tech-context">OCR, transcription, extraction, vision</span>
                     </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">Qdrant / Vector DB</span>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">Qdrant / Vector DB</span><span class="tech-level">4/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-green" style="width:80%"></div></div>
                         <span class="tech-context">10k+ chunks, MCP integration, 2 collections</span>
                     </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">n8n / Workflow</span>
-                        <span class="tech-context">11 production workflows, multi-tenant routing</span>
-                    </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">Docker / Linux / VPS</span>
-                        <span class="tech-context">Traefik, compose, deploy scripts, backups</span>
-                    </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">Twilio / Telephony</span>
-                        <span class="tech-context">voice, SMS, webhooks, signature validation</span>
-                    </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">Prompt Engineering</span>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">Prompt Engineering</span><span class="tech-level">4/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-green" style="width:80%"></div></div>
                         <span class="tech-context">35-field JSON extraction, $0.00035/call</span>
                     </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">MCP Protocol</span>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">MCP Protocol</span><span class="tech-level">4/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-blue" style="width:80%"></div></div>
                         <span class="tech-context">4 servers always-on, on-demand groups</span>
                     </div>
-                    <div class="tech-item" style="flex-direction:column;align-items:flex-start;gap:2px">
-                        <span class="tech-name">Git / CI-CD</span>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">n8n / Workflow</span><span class="tech-level">3.5/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-blue" style="width:70%"></div></div>
+                        <span class="tech-context">11 production workflows, multi-tenant routing</span>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">Python / FastAPI</span><span class="tech-level">3/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-amber" style="width:60%"></div></div>
+                        <span class="tech-context">AI-assisted, 14k LOC in production</span>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">Twilio / Telephony</span><span class="tech-level">3/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-amber" style="width:60%"></div></div>
+                        <span class="tech-context">voice, SMS, webhooks, signature validation</span>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">React 19 / TypeScript</span><span class="tech-level">2.5/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-amber" style="width:50%"></div></div>
+                        <span class="tech-context">AI-assisted, SPA dashboard</span>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">PostgreSQL</span><span class="tech-level">2.5/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-amber" style="width:50%"></div></div>
+                        <span class="tech-context">7 tables, migrations, asyncpg, backups</span>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">Docker / Linux / VPS</span><span class="tech-level">2.5/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-purple" style="width:50%"></div></div>
+                        <span class="tech-context">Traefik, compose, deploy scripts, backups</span>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header"><span class="tech-name">Git</span><span class="tech-level">2.5/5</span></div>
+                        <div class="tech-bar-bg"><div class="tech-bar-fill bar-purple" style="width:50%"></div></div>
                         <span class="tech-context">GitHub Pages, deploy scripts, commit hooks</span>
                     </div>
                 </div>
@@ -1379,12 +1340,12 @@
                 <div class="meta-quote">
                     <p class="en">
                         I wanted to let the process speak for itself. You're looking for someone who uses AI tools daily and translates requirements into working prototypes. Rather than claiming these skills on paper, I made the application itself demonstrate them.<br><br>
-                        Every data point comes from real project logs and git history. The code was built with AI assistance &mdash; the product decisions, prioritization, and client understanding come from 7 years of B2B experience.<br><br>
+                        Every data point comes from real project logs and git history. The code was built with AI assistance &mdash; the product decisions, prioritization, and user understanding come from 8+ years of running my own business.<br><br>
                         All code in my projects was created with Claude Code (AI pair-programming). I'm not a developer &mdash; I'm a Product Owner who understands logic, architecture, and can orchestrate AI to deliver results. The code needs review by an experienced developer. But the structure, product decisions, and prioritization &mdash; that's mine.
                     </p>
                     <p class="pl">
                         Chcialem pozwolic procesowi mowic za siebie. Szukacie kogos, kto uzywa narzedzi AI codziennie i tlumaczy wymagania na dzialajace prototypy. Zamiast deklarowac te umiejetnosci na papierze, sprawilem ze sama aplikacja je demonstruje.<br><br>
-                        Kazdy punkt danych pochodzi z rzeczywistych logow projektowych i historii git. Kod powstal z pomoca AI &mdash; decyzje produktowe, priorytetyzacja i rozumienie klienta wynikaja z 7 lat doswiadczenia w sprzedazy B2B.<br><br>
+                        Kazdy punkt danych pochodzi z rzeczywistych logow projektowych i historii git. Kod powstal z pomoca AI &mdash; decyzje produktowe, priorytetyzacja i rozumienie uzytkownikow wynikaja z 8+ lat prowadzenia wlasnej firmy.<br><br>
                         Caly kod na tych projektach powstal z pomoca Claude Code (AI pair-programming). Nie jestem programista &mdash; jestem Product Ownerem, ktory rozumie logike, architekture i potrafi orkiestrowac AI do dostarczania wynikow. Kod wymaga review doswiadczonego developera. Ale struktura, decyzje produktowe i priorytetyzacja &mdash; to moje.
                     </p>
                     <div class="attribution en">&mdash; Generated by Claude Code from Qdrant vector DB &middot; March 2, 2026</div>
@@ -1407,8 +1368,8 @@
                     <div class="gallup-card">
                         <div class="gallup-rank">#1</div>
                         <h3 class="gallup-name accent-green">Learner</h3>
-                        <p class="gallup-desc en">8 weeks: Python, FastAPI, React, PostgreSQL, Docker, Twilio &mdash; from tutorials to production. Steep learning curves don't stop me.</p>
-                        <p class="gallup-desc pl">8 tygodni: Python, FastAPI, React, PostgreSQL, Docker, Twilio &mdash; z tutoriali do produkcji. Strome krzywe uczenia mnie nie zatrzymuja.</p>
+                        <p class="gallup-desc en">8 weeks: Python, FastAPI, React, PostgreSQL, Docker, Twilio &mdash; from zero to production through iteration. No tutorials &mdash; I learn by building, breaking, and fixing.</p>
+                        <p class="gallup-desc pl">8 tygodni: Python, FastAPI, React, PostgreSQL, Docker, Twilio &mdash; od zera do produkcji przez iteracje. Bez tutoriali &mdash; ucze sie budujac, psujac i naprawiajac.</p>
                     </div>
                     <div class="gallup-card">
                         <div class="gallup-rank">#2</div>
@@ -1419,8 +1380,8 @@
                     <div class="gallup-card">
                         <div class="gallup-rank">#3</div>
                         <h3 class="gallup-name accent-amber">Input</h3>
-                        <p class="gallup-desc en">10,000+ knowledge chunks in a vector database. I collect, organize, and retrieve context. Perfect for multi-project PO.</p>
-                        <p class="gallup-desc pl">10 000+ chunkow wiedzy w bazie wektorowej. Zbieram, organizuje i odzyskuje kontekst. Idealne dla PO wielu projektow.</p>
+                        <p class="gallup-desc en">10,000+ knowledge chunks in a vector database. I collect, organize, and retrieve context &mdash; exactly what a multi-context PO needs. Every decision, every research finding, searchable and reusable.</p>
+                        <p class="gallup-desc pl">10 000+ chunkow wiedzy w bazie wektorowej. Zbieram, organizuje i odzyskuje kontekst &mdash; dokladnie to, czego potrzebuje PO wielu kontekstow. Kazda decyzja, kazdy research, przeszukiwalne i reuzywalne.</p>
                     </div>
                     <div class="gallup-card">
                         <div class="gallup-rank">#4</div>
