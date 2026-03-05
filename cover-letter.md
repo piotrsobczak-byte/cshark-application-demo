@@ -2,7 +2,7 @@
 
 ## Version: Email / nofluffjobs (English)
 
-**Subject:** Product Owner Application — Piotr Sobczak
+**Subject:** Product Owner Application — Piotr S.
 
 ---
 
@@ -19,5 +19,5 @@ In short: 8 years running my own e-commerce business (15 employees), and since e
 Happy to discuss how my experience can contribute to your team.
 
 Best regards,
-Piotr Sobczak
-piotr.sobczak@odok.pl | +48 530 212 221
+Piotr S.
+[email ukryty] | +48 XXX XXX XXX
